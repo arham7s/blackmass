@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Black Mass Energies Diligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: sticky section nav on the left (top bar on narrow screens), one reading column of cards on the right. */
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#15181e; --muted:#5a6270; --line:#dde1e7;
+  --accent:#2747c9; --accent-soft:#e6ebfb; --graphite:#8b93a1; --graphite-soft:#eceef2;
+  --good:#1d7a4a; --good-soft:#e1f2e8; --warn:#9a6200; --warn-soft:#fbf0d9; --bad:#b3261e; --bad-soft:#fbe5e3;
+  --font-display:"Newsreader", Georgia, "Times New Roman", serif;
+  --font-body:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --radius:10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1115; --surface:#171a20; --ink:#e8eaee; --muted:#a2a9b5; --line:#2a2f38;
+    --accent:#8ea2ff; --accent-soft:#1d2440; --graphite:#6f7787; --graphite-soft:#232730;
+    --good:#5fcf93; --good-soft:#14281d; --warn:#e6b553; --warn-soft:#2c2412; --bad:#ff8a80; --bad-soft:#2f1616;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#171a20; --ink:#e8eaee; --muted:#a2a9b5; --line:#2a2f38;
+  --accent:#8ea2ff; --accent-soft:#1d2440; --graphite:#6f7787; --graphite-soft:#232730;
+  --good:#5fcf93; --good-soft:#14281d; --warn:#e6b553; --warn-soft:#2c2412; --bad:#ff8a80; --bad-soft:#2f1616;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:#fff;padding:8px 12px;border-radius:6px;z-index:50}
+.skip:focus{left:12px}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,4vw,40px)}
+h2{font-size:28px}
+h3{font-size:20px;font-family:var(--font-body);font-weight:700;letter-spacing:-.01em}
+p{margin:0;max-width:72ch}
+.num,.mono,td.n,th.n{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--font-mono);font-size:.92em}
+header.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top-inner{max-width:1280px;margin:0 auto;padding:28px 24px 24px;display:grid;gap:14px}
+.eyebrow{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lede{font-size:18px;color:var(--ink);max-width:80ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:6px}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.tile .k{font-size:12.5px;color:var(--muted);font-weight:600}
+.tile .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.layout{max-width:1280px;margin:0 auto;padding:0 24px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+nav.side{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:24px 0}
+nav.side ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:s}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav.side a:hover{background:var(--graphite-soft);color:var(--ink)}
+nav.side a[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.theme-row{margin-top:16px;padding:0 10px;font-size:13px;color:var(--muted)}
+main{display:grid;gap:28px;padding-top:24px;min-width:0}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;gap:18px;min-width:0}
+.sec-head{display:grid;gap:6px}
+.sec-head .tag{font-size:12.5px;font-weight:600;color:var(--muted)}
+.answer{font-size:17px;border-left:3px solid var(--accent);padding-left:14px;max-width:80ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.box{border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:grid;gap:8px;align-content:start;background:var(--surface)}
+.box.soft{background:var(--bg)}
+.box h4{margin:0;font-size:15px}
+ul.clean{margin:0;padding-left:18px;display:grid;gap:6px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+caption{text-align:left;padding:10px 12px;font-weight:600;font-size:13.5px;color:var(--muted);caption-side:top}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{background:var(--bg);font-size:12.5px;color:var(--muted);font-weight:600;position:sticky;top:0}
+td.n,th.n{text-align:right;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{font-weight:700;background:var(--bg)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.neutral{background:var(--graphite-soft);color:var(--muted)}
+.chip.acc{background:var(--accent-soft);color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.seg button{font:inherit;font-size:14px;font-weight:600;padding:7px 14px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"],.seg button[aria-selected="true"]{background:var(--accent);color:#fff}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],:root[data-theme="dark"] .seg button[aria-selected="true"]{color:#0f1115}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"],:root:not([data-theme="light"]) .seg button[aria-selected="true"]{color:#0f1115}}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto;min-width:560px}
+.chart text{fill:var(--muted);font-family:var(--font-body);font-size:12px}
+.chart .lbl{fill:var(--ink);font-weight:600}
+.chart .grid{stroke:var(--line)}
+.chart .axis{stroke:var(--graphite)}
+.chart .bar{fill:var(--graphite)}
+.chart .bar.hl{fill:var(--accent)}
+.chart .bar.neg{fill:var(--bad)}
+.chart .bar.pos{fill:var(--good)}
+.chart .ref{stroke:var(--graphite);stroke-dasharray:4 4;fill:none}
+.chart .line{stroke:var(--accent);stroke-width:2.5;fill:none}
+.chart .area{fill:var(--accent);opacity:.12}
+.chart .dot{fill:var(--accent)}
+.chart{position:relative}
+.chart rect.hit{fill:var(--ink);fill-opacity:0;cursor:crosshair;pointer-events:all}
+.chart rect.hit:hover,.chart rect.hit:focus{fill-opacity:.05}
+.chart rect.hit:focus{outline:none}
+.chart g.col{transition:opacity .15s}
+.chart svg.hovering g.col{opacity:.35}
+.chart svg.hovering g.col.on{opacity:1}
+.chart g.col.on .bar{stroke:var(--ink);stroke-width:1.5}
+.chart .bar{transform-box:fill-box;transform-origin:bottom;animation:grow .45s ease-out}
+.chart .bar.neg{transform-origin:top}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.readout{font-size:14px;min-height:22px;padding:8px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--line);max-width:none}
+.readout b{font-variant-numeric:tabular-nums}
+.box,.step,.flow .node,dl.gloss div,.sev{transition:border-color .15s,box-shadow .15s,transform .15s}
+.box:hover,dl.gloss div:hover,.sev:hover{border-color:var(--graphite);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.step:hover{border-color:var(--accent);transform:translateY(-1px)}
+.flow .node:hover{border-color:var(--accent)}
+tbody tr:hover td{background:var(--accent-soft)}
+.bh{padding:2px 4px;border-radius:6px;cursor:default}
+.bh:hover,.bh:focus-within,.bh:focus{background:var(--accent-soft)}
+.bh:hover .val,.bh:focus .val{color:var(--ink);font-weight:600}
+.bh .fill{transition:width .4s ease-out,background .15s}
+.bh:hover .fill,.bh:focus .fill{background:var(--accent)}
+.seg button:hover{background:var(--graphite-soft);color:var(--ink)}
+.seg button[aria-pressed="true"]:hover,.seg button[aria-selected="true"]:hover{background:var(--accent)}
+.tip{display:none;position:absolute;pointer-events:none;background:var(--ink);color:var(--surface);font-size:13px;padding:7px 10px;border-radius:6px;z-index:5;max-width:320px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.note{font-size:13.5px;color:var(--muted)}
+details{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+details>summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:center;justify-content:space-between}
+details>summary::-webkit-details-marker{display:none}
+details>summary::after{content:"+";font-family:var(--font-mono);color:var(--muted)}
+details[open]>summary::after{content:"–"}
+details .body{padding:0 14px 14px;display:grid;gap:10px}
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.step{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:10px 12px;cursor:pointer;display:grid;gap:2px;color:var(--ink)}
+.step .no{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.step .nm{font-weight:700;font-size:14.5px}
+.step .sb{font-size:12.5px;color:var(--muted)}
+.step.dash{border-style:dashed}
+.step[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.panel{border:1px solid var(--line);border-radius:var(--radius);padding:16px;background:var(--bg);display:grid;gap:10px}
+.panel h4{margin:0;font-size:17px}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;font-size:14px}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{margin:0}
+/* flow */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .node{flex:1 1 150px;border:1px solid var(--line);border-radius:var(--radius);padding:12px;background:var(--surface);display:grid;gap:4px}
+.flow .node.on{border:2px solid var(--accent);background:var(--accent-soft)}
+.flow .node.off{border-style:dashed;color:var(--muted)}
+.flow .arrow{align-self:center;color:var(--graphite);font-family:var(--font-mono)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* filters */
+label.f{display:grid;gap:4px;font-size:12.5px;font-weight:600;color:var(--muted)}
+input[type="search"],select{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:160px}
+.sum-row{display:flex;flex-wrap:wrap;gap:18px;font-size:14px}
+.sum-row b{font-variant-numeric:tabular-nums}
+.tx-wrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:var(--radius)}
+td.in{color:var(--good)}
+td.out{color:var(--bad)}
+.check li{list-style:none;display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
+.check{padding:0;margin:0}
+.check input{margin-top:5px;width:16px;height:16px;accent-color:var(--accent)}
+.check li:has(input:checked) span{color:var(--muted)}
+.sev{display:grid;grid-template-columns:6px 1fr;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.sev .bar{background:var(--graphite)}
+.sev.h .bar{background:var(--bad)} .sev.m .bar{background:var(--warn)} .sev.l .bar{background:var(--good)}
+.sev .in{padding:12px 14px;display:grid;gap:4px}
+.sev .in .t{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700}
+.risks{display:grid;gap:10px}
+dl.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0}
+dl.gloss div{border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+dl.gloss dt{font-weight:700}
+dl.gloss dd{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.timeline{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px;padding-left:18px}
+.timeline .ev{position:relative;padding:6px 0 12px}
+.timeline .ev::before{content:"";position:absolute;left:-25px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--graphite)}
+.timeline .ev.key::before{border-color:var(--accent);background:var(--accent)}
+.timeline .d{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+.bars-h{display:grid;gap:6px}
+.bh{display:grid;grid-template-columns:minmax(150px,240px) 1fr;gap:10px;align-items:center;font-size:13.5px}
+.bh .track{display:flex;align-items:center;gap:8px}
+.bh .fill{height:14px;border-radius:3px;background:var(--graphite)}
+.bh .fill.hl{background:var(--accent)}
+.bh .val{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.bh .nm{text-align:right}
+footer{max-width:1280px;margin:0 auto;padding:0 24px 40px;color:var(--muted);font-size:13px}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;gap:0}
+  nav.side{position:sticky;top:0;z-index:20;background:var(--bg);padding:8px 0;max-height:none;border-bottom:1px solid var(--line)}
+  nav.side ol{display:flex;overflow-x:auto;gap:4px;padding-bottom:4px}
+  nav.side a{white-space:nowrap}
+  .theme-row{display:none}
+  section.card{padding:20px}
+  .bh{grid-template-columns:1fr}
+  .bh .nm{text-align:left}
+}
+@media (max-width:420px){ .top-inner,.layout{padding-left:16px;padding-right:16px} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-inner">
+    <div class="eyebrow">Seed round diligence · Data room via Samaveda Capital · As of 12 Nov 2026</div>
+    <h1>Black Mass Energies</h1>
+    <p class="lede">A Bengaluru startup raising <b>₹20 Cr seed</b>. It pitches itself as India's battery-recycling "supply backbone": scrap sourcing, black mass, hydromet refining and export. The data room shows something narrower and real: a fast-growing <b>black mass trading desk</b> earning 1–3% gross margin, with refining still at bench scale and exports at enquiry stage.</p>
+    <div class="tiles" role="list">
+      <div class="tile" role="listitem"><div class="k">Raise</div><div class="v">₹20 Cr</div><div class="s">Seed, equity, valuation not given</div></div>
+      <div class="tile" role="listitem"><div class="k">Revenue Apr–Sep 2026</div><div class="v">₹18.4 Cr</div><div class="s">Ex-GST, ties to bank within 0.2%</div></div>
+      <div class="tile" role="listitem"><div class="k">Gross margin</div><div class="v">1.6%</div><div class="s">Feb–Sep average, 0.8–2.7% by month</div></div>
+      <div class="tile" role="listitem"><div class="k">EBITDA Feb–Sep</div><div class="v">+₹3.6 L</div><div class="s">Cumulative, per MIS</div></div>
+      <div class="tile" role="listitem"><div class="k">Liquidity, 4 Oct</div><div class="v">₹1.14 Cr</div><div class="s">Cash + FDs + receivables</div></div>
+      <div class="tile" role="listitem"><div class="k">Top-3 customers</div><div class="v">88%</div><div class="s">Share of money received</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="side" aria-label="Sections">
+    <ol id="toc">
+      <li><a href="#overview">Company overview</a></li>
+      <li><a href="#basics">Black mass basics</a></li>
+      <li><a href="#operations">Operations</a></li>
+      <li><a href="#technology">Technology</a></li>
+      <li><a href="#market">Market and policy</a></li>
+      <li><a href="#competition">Competition</a></li>
+      <li><a href="#revenue">Revenue and MIS</a></li>
+      <li><a href="#cash">Cash flow</a></li>
+      <li><a href="#counterparties">Customers and suppliers</a></li>
+      <li><a href="#transactions">Transaction explorer</a></li>
+      <li><a href="#exports">Export pipeline</a></li>
+      <li><a href="#ip">Patent and IP</a></li>
+      <li><a href="#claims">Deck claims check</a></li>
+      <li><a href="#risks">Risks and questions</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+    <div class="theme-row">
+      <label class="f" for="themeSel">Theme
+        <select id="themeSel"><option value="">Match system</option><option value="light">Light</option><option value="dark">Dark</option></select>
+      </label>
+    </div>
+  </nav>
+
+  <main id="main" tabindex="-1">
+
+  <!-- 1 OVERVIEW -->
+  <section class="card" id="overview" aria-labelledby="h-overview">
+    <div class="sec-head"><span class="tag">01 · Company overview</span><h2 id="h-overview">Who they are and what they are raising</h2></div>
+    <p class="answer">Two co-founders, eight staff, ₹1.05 Cr raised so far. Revenue is ₹20.1 Cr since February 2026 from trading black mass between Indian processors and recyclers. The ₹20 Cr seed would fund working capital and an LFP refining pilot.</p>
+    <div class="grid2">
+      <div class="box">
+        <h4>Company facts</h4>
+        <dl class="kv">
+          <dt>Legal name</dt><dd>Black Mass Energies Private Limited</dd>
+          <dt>Address</dt><dd>Enthys 662, 6th Floor, HSR Layout, Bengaluru 560102</dd>
+          <dt>Status</dt><dd>DPIIT-recognised startup</dd>
+          <dt>Bank</dt><dd>HDFC Bank current account (ending 2579)</dd>
+          <dt>Advisor</dt><dd>Samaveda Capital, Hyderabad (M&amp;A and capital advisory)</dd>
+          <dt>Deck date</dt><dd>October 2026</dd>
+          <dt>First revenue</dt><dd>February 2026 (₹78 L)</dd>
+          <dt>Headcount</dt><dd>5 (Feb) → 8 (Aug–Sep); blended ₹43,750 per head</dd>
+        </dl>
+      </div>
+      <div class="box">
+        <h4>Founding team</h4>
+        <p><b>Shivam Kumar Gupta</b>, Co-founder &amp; CEO. Runs sourcing, black mass trading, investor relations, partnerships and global commodity trading.</p>
+        <p><b>Shashank Chaurasia</b>, Co-founder &amp; CTO. Runs R&amp;D, technical operations, process optimisation and future plant technology.</p>
+        <p class="note">Others in the documents: Abhishek Kumar (Business Development, runs export emails); staff paid via bank: Vaibhav Juneja, Marpuri Lokabiram, Naveen Chellapilla, Navyasri Bandari. Founders draw ₹1.0–1.5 L a month each.</p>
+        <p class="note">Named patent inventor is <b>Dr. Dhanasekar Kesavan</b>, an Indian scientist resident in South Korea, not a founder. R&amp;D links claimed with VIT Chennai and IIT Kanpur.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="box">
+        <h4>Funding history</h4>
+        <div class="timeline">
+          <div class="ev key"><div class="d">27 Apr 2026</div>₹1.00 Cr pre-seed, called an "FDI-backed US angel" in the deck. The bank shows a domestic RTGS from an ICICI account in the name of Gurucharan Singh.</div>
+          <div class="ev"><div class="d">29 Jun 2026</div>₹5 L equity from Abhishek Agarwal.</div>
+          <div class="ev"><div class="d">6 Aug 2026</div>₹17.5 L paid to Folks House LLP for third-party due diligence (fundraising cost).</div>
+          <div class="ev key"><div class="d">Oct 2026</div>₹20 Cr seed opened through Samaveda Capital. Equity with pro-rata rights.</div>
+        </div>
+      </div>
+      <div class="box">
+        <h4>Use of the ₹20 Cr</h4>
+        <div class="bars-h" id="useFunds" aria-label="Use of funds"></div>
+        <p class="note">Most of the deck's "moat" spend is the ₹6 Cr R&amp;D line. The ₹8 Cr working-capital line funds more trading volume.</p>
+      </div>
+    </div>
+    <details>
+      <summary>What is in the data room (7 documents)</summary>
+      <div class="body">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Document</th><th>What it contains</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td>Samaveda teaser deck (PDF, 17 pages)</td><td>Problem, solution, market sizing, monthly invoice values, tech, business model, competition, ask, team</td><td>Company's own story and claims</td></tr>
+            <tr><td>Detailed MIS &amp; Operating Metrics (XLSX)</td><td>Monthly P&amp;L Feb–Sep 2026, customer cohort, CAC/LTV, headcount, budget vs actual</td><td>Revenue, margins, unit economics</td></tr>
+            <tr><td>Cash Flow FY27 YTD (XLSX)</td><td>Direct-method cash flow and 228 categorised HDFC transactions, 1 Apr–4 Oct 2026</td><td>Cash, counterparties, verification</td></tr>
+            <tr><td>Invention Disclosure Form (DOCX)</td><td>Five-stage carbothermic process, novelty claims, prior art, diagrams</td><td>Technology and IP</td></tr>
+            <tr><td>Patent Filing Receipt (PDF)</td><td>Indian application 202641111332, filed 16 Sep 2026</td><td>IP status and deadlines</td></tr>
+            <tr><td>Email: Li₂CO₃ purchase request (PDF)</td><td>Thread with Sichuan Aoris Lithium, China, 23–25 Sep 2026</td><td>Export pipeline</td></tr>
+            <tr><td>Email: critical mineral sourcing (PDF)</td><td>Thread with LapisChem, Türkiye, 24–28 Sep 2026</td><td>Export pipeline</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2 BASICS -->
+  <section class="card" id="basics" aria-labelledby="h-basics">
+    <div class="sec-head"><span class="tag">02 · Black mass basics</span><h2 id="h-basics">How a dead battery becomes a tradeable commodity</h2></div>
+    <p class="answer">Black mass is the black powder left after spent lithium-ion cells are discharged, shredded and sieved. It holds the cathode metals and the graphite, and recyclers buy it on its tested metal content. Click a stage to see what happens and where Black Mass Energies sits.</p>
+    <div class="steps" role="tablist" aria-label="Battery recycling value chain" id="vcSteps"></div>
+    <div class="panel" id="vcPanel" role="tabpanel" aria-live="polite"></div>
+    <div class="grid2">
+      <div class="box soft">
+        <h4>Why chemistry matters</h4>
+        <p>NMC/NCA black mass contains nickel and cobalt, so it is worth more per tonne. LFP (lithium iron phosphate) black mass has neither, so lithium is the only valuable metal and the economics are thinner. The deck says LFP is the dominant EV chemistry in India and targets it for R&amp;D.</p>
+      </div>
+      <div class="box soft">
+        <h4>How it is priced</h4>
+        <p>Buyers pay a "payable": a percentage of the market value of the contained metals, set after an independent assay (Black Mass Energies uses Inspectorate Griffith India). A trader earns the gap between the payable it gets from a recycler and the one it pays a processor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 OPERATIONS -->
+  <section class="card" id="operations" aria-labelledby="h-ops">
+    <div class="sec-head"><span class="tag">03 · Operations</span><h2 id="h-ops">How they actually collect, move and sell material</h2></div>
+    <p class="answer">The deck describes five owned stages. The bank statement shows one: buy black mass from processors and traders, assay it, and resell it to recyclers. On 36 of 41 days with customer receipts, matching supplier payments of at least 80% went out the same or next day. Those days carry 96% of all receipt value.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Choose view">
+        <button type="button" aria-pressed="true" data-ops="pitch">Pitched in the deck</button>
+        <button type="button" aria-pressed="false" data-ops="actual">What the bank shows</button>
+      </div>
+    </div>
+    <div id="opsView"></div>
+    <h3>Life of one lot, step by step</h3>
+    <p class="note">Reconstructed from bank timing, testing payments and the deck. Steps with no document behind them are marked.</p>
+    <div class="steps" role="tablist" aria-label="Lot lifecycle" id="lotSteps"></div>
+    <div class="panel" id="lotPanel" role="tabpanel" aria-live="polite"></div>
+    <h3>Worked examples from the bank statement</h3>
+    <div class="table-wrap"><table>
+      <caption>Same-day or next-day pairs, ₹ including GST</caption>
+      <thead><tr><th>Date</th><th>Customer paid in</th><th class="n">In</th><th>Supplier paid out</th><th class="n">Out</th><th class="n">Spread</th></tr></thead>
+      <tbody id="pairsBody"></tbody>
+    </table></div>
+    <p class="note">Several lots show zero rupee spread. The margin on those lots, if any, is booked somewhere this account does not show. Lot-level invoices are needed to explain it.</p>
+  </section>
+
+  <!-- 4 TECHNOLOGY -->
+  <section class="card" id="technology" aria-labelledby="h-tech">
+    <div class="sec-head"><span class="tag">04 · Technology</span><h2 id="h-tech">Two refining routes that do not match each other</h2></div>
+    <p class="answer">The deck sells an LFP formic-acid hydromet route at bench stage (78% lithium recovery). The only patent filed covers a carbothermic route that yields a nickel–cobalt alloy and a manganese product. LFP black mass contains neither nickel, cobalt nor manganese.</p>
+    <div class="seg" role="tablist" aria-label="Technology route">
+      <button type="button" role="tab" aria-selected="true" aria-controls="routeA" id="tabA">Route A · LFP hydromet (deck)</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="routeB" id="tabB">Route B · Carbothermic (patent)</button>
+    </div>
+    <div id="routeA" role="tabpanel" aria-labelledby="tabA" class="grid2">
+      <div class="box">
+        <h4>Process as described</h4>
+        <ol class="clean">
+          <li><b>Feed:</b> LFP black mass (lithium iron phosphate + graphite).</li>
+          <li><b>Selective leach:</b> two-step formic-acid leach that dissolves lithium and leaves iron phosphate behind.</li>
+          <li><b>Purify:</b> impurity removal and solvent extraction.</li>
+          <li><b>Crystallise:</b> lithium precipitated and refined to battery-grade Li₂CO₃.</li>
+          <li><b>Control layer:</b> AI-assisted tuning of pH, temperature, dosage and kinetics.</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h4>Evidence vs targets</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Metric</th><th>Claimed / target</th><th>Shown</th></tr></thead>
+          <tbody>
+            <tr><td>Lithium recovery</td><td>95%+ target; 94.5% and &gt;95% cited</td><td><span class="chip warn">78% bench</span> (cited figures are published literature)</td></tr>
+            <tr><td>Purity</td><td>99.5%+ (p.14) or 99.9%+ (p.9)</td><td><span class="chip neutral">No data</span></td></tr>
+            <tr><td>Scale</td><td>Pilot 500 MT/yr input, Year 2</td><td><span class="chip neutral">Design stage</span></td></tr>
+            <tr><td>Revenue</td><td>$1.4M a year after plant setup</td><td><span class="chip neutral">Projection</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">For scale: Recyclekaro reports &gt;95% lithium extraction at &gt;99.96% purity for its patented LFP process, and Exigo runs a 7,600 MTA refining plant with direct LFP cathode recycling.</p>
+      </div>
+    </div>
+    <div id="routeB" role="tabpanel" aria-labelledby="tabB" hidden>
+      <p class="note">Click each stage. The process separates black mass into four products by exploiting differences in solubility, magnetism and acid reactivity.</p>
+      <div class="steps" role="tablist" aria-label="Carbothermic process stages" id="pbSteps"></div>
+      <div class="panel" id="pbPanel" role="tabpanel" aria-live="polite"></div>
+      <div class="grid2">
+        <div class="box soft"><h4>Claimed advantages</h4><p>Fewer steps than conventional hydromet, less mixed-metal dissolution, lower acid and water use, less wastewater, lower lithium and graphite loss, and four clean product streams instead of one mixed leach liquor.</p></div>
+        <div class="box soft"><h4>Who else does carbothermal</h4><p>Bengaluru's Metastable Materials, seed-funded by Sequoia's Surge, Speciale Invest and Theia Ventures, has pitched a chemical-free "integrated carbothermal reduction" process since 2022–23. The same core idea is already being commercialised by a funded peer.</p></div>
+      </div>
+    </div>
+    <h3>R&amp;D roadmap as pitched</h3>
+    <div class="timeline">
+      <div class="ev key"><div class="d">Done</div>Lab validation: 78% lithium recovery from LFP black mass at bench scale.</div>
+      <div class="ev"><div class="d">Sep 2026</div>Provisional patent filed on the carbothermic route (no. 202641111332).</div>
+      <div class="ev"><div class="d">Year 2</div>Pilot plant design, 500 MT/yr input, modular for scale-up. Funded by 30% of the seed (₹6 Cr).</div>
+      <div class="ev"><div class="d">Year 2+</div>Commercial scale, $1.4M annual revenue potential from Li₂CO₃, supply to Indian gigafactories.</div>
+    </div>
+  </section>
+
+  <!-- 5 MARKET -->
+  <section class="card" id="market" aria-labelledby="h-market">
+    <div class="sec-head"><span class="tag">05 · Market and policy</span><h2 id="h-market">Big tailwinds, but policy favours refiners over traders</h2></div>
+    <p class="answer">India's rules push producers to recycle and push value-add onshore. That helps refiners. It also restricts black mass exports and excludes black-mass-only players from the ₹1,500 Cr recycling subsidy. Both hit the parts of Black Mass Energies' plan that exist today.</p>
+    <div class="grid2">
+      <div class="box">
+        <h4>Market size (company figures, unverified)</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Layer</th><th class="n">Size</th><th>Definition in deck</th></tr></thead>
+          <tbody>
+            <tr><td>TAM</td><td class="n">$40B</td><td>Global battery recycling and critical mineral recovery by 2030</td></tr>
+            <tr><td>SAM</td><td class="n">$4B</td><td>India's addressable battery waste and black mass trade</td></tr>
+            <tr><td>SOM</td><td class="n">$400M–$1B</td><td>Capturable in 3 years via OEM and recycler contracts</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Deck also cites 30–35% CAGR in Li-ion battery waste. Recyclekaro uses a similar 30% CAGR figure. The SOM implies 25–60% share of the SAM in three years, which no source in the data room supports.</p>
+      </div>
+      <div class="box">
+        <h4>Why now, per the deck</h4>
+        <ul class="clean">
+          <li>FAME III, PLI for advanced chemistry cells and mandatory EPR force OEMs to deal with battery waste.</li>
+          <li>Critical-mineral security: cutting dependence on Chinese lithium carbonate.</li>
+          <li>EU Battery Regulation recycled-content thresholds create an export premium for certified material.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Policy, and what each rule means for this company</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Rule</th><th>What it says</th><th>Effect on Black Mass Energies</th></tr></thead>
+      <tbody>
+        <tr><td>Battery Waste Management Rules 2022 (amended 2023–25)</td><td>Producers register with CPCB and meet collection and recycling targets through registered recyclers. Material recovery targets rise to 90% from 2026-27.</td><td><span class="chip good">Tailwind</span> Steady scrap flow into formal recyclers, who are BME's buyers. BME's own CPCB registration is not in the data room.</td></tr>
+        <tr><td>Black mass export curbs</td><td>Black mass is classed as hazardous waste (HS 8549). Export needs MoEF&amp;CC permission and a DGFT licence. Refined salts and metals are not restricted.</td><td><span class="chip bad">Headwind</span> The deck's "export certified black mass" line faces a licence wall. Exporting refined product needs a refinery BME does not have.</td></tr>
+        <tr><td>Critical Mineral Recycling Incentive Scheme (₹1,500 Cr, FY26–FY31)</td><td>Capex subsidy up to 20% (cap ₹25 Cr small / ₹50 Cr large) for R3/R4 recyclers that extract minerals at ≥80% yield and 99% purity. Black-mass-only players excluded.</td><td><span class="chip warn">Conditional</span> Today's trading business is ineligible. A refinery that hits 80%/99% could claim up to ₹25 Cr.</td></tr>
+        <tr><td>Domestic payables gap</td><td>Industry sources say Indian refiners pay about 2% less on black mass than export buyers, and Korean buyers paid record 85% NCM payables in Nov 2025.</td><td><span class="chip neutral">Context</span> Matches BME's 1–3% margin. The spread is thin and set by refiners, not by the trader.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 6 COMPETITION -->
+  <section class="card" id="competition" aria-labelledby="h-comp">
+    <div class="sec-head"><span class="tag">06 · Competition</span><h2 id="h-comp">The "competitors" are mostly much larger, and some are its customers</h2></div>
+    <p class="answer">The deck's matrix puts Black Mass Energies alone in the "high supply control + LFP R&amp;D" box. Outside sources show the named rivals already run refineries at thousands of tonnes, hold patents and have raised far more. Two of BME's largest buyers, MiniMines and Recyclekaro, are themselves recyclers with in-house refining.</p>
+    <h3>The deck's own matrix</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Player</th><th>Supply control</th><th>Hydromet R&amp;D</th></tr></thead>
+      <tbody>
+        <tr><td>Attero Recycling</td><td>Partial</td><td>Yes (NMC focus)</td></tr>
+        <tr><td>Lohum Cleantech</td><td>Low</td><td>Yes (upstream)</td></tr>
+        <tr><td>Recyckle / Metastable</td><td>Low</td><td>No</td></tr>
+        <tr><td>Unorganised traders</td><td>High (local)</td><td>No</td></tr>
+        <tr><td><b>Black Mass Energies</b></td><td><b>High (national)</b></td><td><b>Yes (LFP)</b></td></tr>
+      </tbody>
+    </table></div>
+    <h3>Expanded landscape from public sources</h3>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Filter landscape">
+        <button type="button" aria-pressed="true" data-cf="all">All</button>
+        <button type="button" aria-pressed="false" data-cf="refiner">Refiners</button>
+        <button type="button" aria-pressed="false" data-cf="customer">BME customers</button>
+        <button type="button" aria-pressed="false" data-cf="trader">Traders</button>
+      </div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Company</th><th>Model</th><th>Scale and tech</th><th>Capital</th><th>Relation to BME</th></tr></thead>
+      <tbody id="compBody"></tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="box soft"><h4>Where BME could defend a position</h4><ul class="clean"><li>Aggregating fragmented black mass from small R2 processors and traders for recyclers that want steady feed.</li><li>Assay-backed quality and settlement speed: buyers pay, suppliers are paid within a day.</li><li>A future LFP niche, if bench results scale.</li></ul></div>
+      <div class="box soft"><h4>Where it is exposed</h4><ul class="clean"><li>Refiners can buy directly from the same processors, and many already source from aggregators themselves.</li><li>No owned plant, licence or patent that a buyer needs.</li><li>Its customers are building capacity that competes with its refining plan.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 7 REVENUE -->
+  <section class="card" id="revenue" aria-labelledby="h-rev">
+    <div class="sec-head"><span class="tag">07 · Revenue and MIS</span><h2 id="h-rev">Revenue grew 4.6× in seven months on a 1–3% margin</h2></div>
+    <p class="answer">Net revenue went from ₹78 L in February to a ₹5.17 Cr peak in July and ₹3.60 Cr in September. Gross margin totalled ₹31.6 L on ₹20.1 Cr, and EBITDA turned positive in four of eight months.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Metric shown in chart" id="revSeg">
+        <button type="button" aria-pressed="true" data-m="rev">Net revenue</button>
+        <button type="button" aria-pressed="false" data-m="gm">Gross margin ₹</button>
+        <button type="button" aria-pressed="false" data-m="gmp">Gross margin %</button>
+        <button type="button" aria-pressed="false" data-m="ebitda">EBITDA</button>
+      </div>
+    </div>
+    <div class="chart" id="revChart"></div>
+    <p class="readout" id="revReadout" aria-live="polite"></p>
+    <p class="note" id="revNote"></p>
+    <details>
+      <summary>Full monthly MIS P&amp;L, line by line (₹ lakh)</summary>
+      <div class="body"><div class="table-wrap"><table id="misTable"></table></div>
+      <p class="note">Source: Detailed MIS &amp; Operating Metrics. Months are labelled "FY27 Jan–Dec" in the sheet, but Feb–Mar 2026 fall in FY26.</p></div>
+    </details>
+    <h3>How to read the MIS</h3>
+    <div class="grid2">
+      <div class="box"><h4>It is a SaaS template</h4><p>Rows say "MRR", "NRR" and "CAC", and one header asks what problem "Dview" solves (another company's name). For a commodity trader, "MRR" is simply the month's black mass sales, not recurring revenue.</p></div>
+      <div class="box"><h4>Costs are mostly fixed placeholders</h4><p>Sales salaries ₹1 L, founders ₹2 L, R&amp;D ₹50 K and support ₹20 K are flat every month. Raw material is 97–99% of revenue. That leaves gross margin as the only moving line.</p></div>
+      <div class="box"><h4>Budget is not a plan</h4><p>"Budget vs actual" compares against a 15% month-on-month line the sheet itself marks as a placeholder. A "+230% variance" in July is not a beat against a real budget.</p></div>
+    </div>
+    <h3>Customer and unit-economics rows</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Metric</th><th class="n">Feb</th><th class="n">Mar</th><th class="n">Apr</th><th class="n">May</th><th class="n">Jun</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th></tr></thead>
+      <tbody>
+        <tr><td>Customers (cumulative)</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">6</td><td class="n">–</td><td class="n">–</td></tr>
+        <tr><td>Live customers</td><td class="n">2</td><td class="n">3</td><td class="n">3</td><td class="n">4</td><td class="n">4</td><td class="n">4</td><td class="n">–</td><td class="n">–</td></tr>
+        <tr><td>New / churned</td><td class="n">0/0</td><td class="n">1/0</td><td class="n">1/1</td><td class="n">2/0</td><td class="n">2/0</td><td class="n">2/1</td><td class="n">–</td><td class="n">1/–</td></tr>
+        <tr><td>New bookings</td><td class="n">2</td><td class="n">1</td><td class="n">2</td><td class="n">4</td><td class="n">2</td><td class="n">3</td><td class="n">–</td><td class="n">1</td></tr>
+        <tr><td>ARPU (₹ L/month)</td><td class="n">39.0</td><td class="n">31.0</td><td class="n">36.7</td><td class="n">70.3</td><td class="n">67.8</td><td class="n">129.3</td><td class="n">–</td><td class="n">–</td></tr>
+        <tr><td>CAC (₹ K)</td><td class="n">–</td><td class="n">100</td><td class="n">100</td><td class="n">50</td><td class="n">50</td><td class="n">50</td><td class="n">–</td><td class="n">100</td></tr>
+        <tr><td>Monthly churn</td><td class="n">–</td><td class="n">0%</td><td class="n">33%</td><td class="n">0%</td><td class="n">0%</td><td class="n">25%</td><td class="n">0%</td><td class="n">–</td></tr>
+        <tr><td>NRR</td><td class="n">–</td><td class="n">0%</td><td class="n">118%</td><td class="n">91%</td><td class="n">61%</td><td class="n">111%</td><td class="n">0%</td><td class="n">–</td></tr>
+        <tr><td>LTV : CAC</td><td class="n">–</td><td class="n">–</td><td class="n">0.9×</td><td class="n">–</td><td class="n">–</td><td class="n">9.9×</td><td class="n">–</td><td class="n">–</td></tr>
+        <tr><td>Headcount</td><td class="n">5</td><td class="n">5</td><td class="n">7</td><td class="n">7</td><td class="n">7</td><td class="n">7</td><td class="n">8</td><td class="n">8</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">NRR swings because buyers order lot by lot; it does not measure retention here. LTV:CAC uses gross margin × an assumed 3–4 month lifetime and is illustrative only.</p>
+    <h3>Do the deck, MIS and bank agree?</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Month</th><th class="n">Deck net revenue</th><th class="n">MIS net revenue</th><th class="n">MIS × 1.18 (GST)</th><th class="n">Bank receipts</th><th>Verdict</th></tr></thead>
+      <tbody id="reconBody"></tbody>
+    </table></div>
+    <p class="note">April–September MIS revenue of ₹18.43 Cr × 1.18 = ₹21.75 Cr, against ₹21.79 Cr of customer receipts in the bank. Monthly gaps are timing (receipts land a few days after invoices). The deck stops at July's peak and projects a ₹60+ Cr FY27 run rate; April–September annualises to about ₹37 Cr.</p>
+  </section>
+
+  <!-- 8 CASH -->
+  <section class="card" id="cash" aria-labelledby="h-cash">
+    <div class="sec-head"><span class="tag">08 · Cash flow</span><h2 id="h-cash">₹21.8 Cr flowed through; operations used ₹12.6 L</h2></div>
+    <p class="answer">The bank balance fell from ₹1.0 Cr after the April raise to ₹26 L by October. ₹55 L of that moved to fixed deposits and ₹17.5 L went on diligence fees. Total liquidity on 4 October was ₹1.14 Cr.</p>
+    <div class="chart" id="cashChart"></div>
+    <p class="readout" id="cashReadout" aria-live="polite"></p>
+    <div class="table-wrap"><table>
+      <caption>Direct-method cash flow, ₹ lakh. Built from 228 HDFC transactions; reconciles to the bank balance every month.</caption>
+      <thead><tr><th>Line</th><th class="n">Apr</th><th class="n">May</th><th class="n">Jun</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th class="n">1–4 Oct</th><th class="n">Total</th></tr></thead>
+      <tbody>
+        <tr><td>Receipts from customers</td><td class="n">139.1</td><td class="n">323.7</td><td class="n">314.4</td><td class="n">621.4</td><td class="n">385.5</td><td class="n">394.6</td><td class="n">0</td><td class="n">2,178.8</td></tr>
+        <tr><td>Payments to suppliers + refunds</td><td class="n">(139.0)</td><td class="n">(322.9)</td><td class="n">(326.2)</td><td class="n">(588.6)</td><td class="n">(383.5)</td><td class="n">(404.6)</td><td class="n">0</td><td class="n">(2,164.7)</td></tr>
+        <tr><td>Salaries and staff</td><td class="n">0</td><td class="n">(2.2)</td><td class="n">(3.0)</td><td class="n">(2.4)</td><td class="n">(2.5)</td><td class="n">(2.4)</td><td class="n">0</td><td class="n">(12.4)</td></tr>
+        <tr><td>GST, testing, opex, bank charges, other receipts</td><td class="n">(0.7)</td><td class="n">(0.8)</td><td class="n">(0.4)</td><td class="n">(9.0)</td><td class="n">(2.5)</td><td class="n">(0.9)</td><td class="n">0</td><td class="n">(14.3)</td></tr>
+        <tr class="total"><td>Operating cash flow</td><td class="n">(0.6)</td><td class="n">(2.1)</td><td class="n">(15.1)</td><td class="n">21.4</td><td class="n">(3.0)</td><td class="n">(13.3)</td><td class="n">0</td><td class="n">(12.6)</td></tr>
+        <tr><td>FDs placed, net of interest</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">(50.0)</td><td class="n">(5.0)</td><td class="n">0</td><td class="n">0.7</td><td class="n">(54.3)</td></tr>
+        <tr><td>Equity raised</td><td class="n">100.0</td><td class="n">0</td><td class="n">5.0</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">105.0</td></tr>
+        <tr><td>Due-diligence fees (Folks House LLP)</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">(17.5)</td><td class="n">0</td><td class="n">0</td><td class="n">(17.5)</td></tr>
+        <tr><td>Promoter account, net</td><td class="n">0.1</td><td class="n">(0.1)</td><td class="n">0</td><td class="n">0</td><td class="n">5.0</td><td class="n">0</td><td class="n">0</td><td class="n">5.1</td></tr>
+        <tr class="total"><td>Closing bank balance</td><td class="n">100.1</td><td class="n">97.9</td><td class="n">87.8</td><td class="n">59.2</td><td class="n">38.7</td><td class="n">25.5</td><td class="n">26.2</td><td class="n">26.2</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="box"><h4>Liquidity on 4 Oct 2026</h4><dl class="kv"><dt>Cash in bank</dt><dd class="num">₹26.2 L</dd><dt>Fixed deposits</dt><dd class="num">₹55.0 L</dd><dt>Receivables</dt><dd class="num">₹33.0 L (MIS says ₹17 L)</dd><dt>Payables declared</dt><dd class="num">₹0</dd><dt><b>Total</b></dt><dd class="num"><b>₹1.14 Cr</b></dd></dl></div>
+      <div class="box"><h4>Cash spread vs MIS margin</h4><p>Customer receipts minus supplier payments and refunds = <b>₹14.1 L on ₹21.8 Cr (0.65%)</b>. It is GST-inclusive, so it understates the ex-GST margin, but it confirms the 1–3% MIS figure is the right order.</p></div>
+      <div class="box"><h4>Overheads are tiny</h4><p>About ₹2.4 L a month payroll, one ₹10.4 L GST payment in July, ₹67 K of assay fees in six months. Opex never exceeded ₹3 L in a month.</p></div>
+    </div>
+    <details>
+      <summary>Unusual items to explain</summary>
+      <div class="body"><ul class="clean">
+        <li>₹25 L received back from Ecobat Energies (a supplier) in July, booked as a customer receipt. Likely the May advance returned.</li>
+        <li>₹4.5 L refunded to Metalux in August; Metalux has bought nothing since July.</li>
+        <li>₹5 L cash deposited by the CEO in August, then ₹5 L placed in an FD the same day.</li>
+        <li>₹2.3 L credit from Remine India (a supplier) in July.</li>
+        <li>The MIS shows ₹90 L closing cash in July and ₹92 L in September. The bank shows ₹59.2 L and ₹25.5 L (₹109 L and ₹80.5 L with FDs).</li>
+        <li>The ₹1 Cr "FDI" round arrived as a domestic RTGS. FIRC and FC-GPR filings should be checked.</li>
+      </ul></div>
+    </details>
+  </section>
+
+  <!-- 9 COUNTERPARTIES -->
+  <section class="card" id="counterparties" aria-labelledby="h-cp">
+    <div class="sec-head"><span class="tag">09 · Customers and suppliers</span><h2 id="h-cp">Three customers paid 88% of all receipts</h2></div>
+    <p class="answer">Navprakriti Green Energies, Minimines Cleantech and Metalux Energy paid ₹19.3 Cr of ₹21.8 Cr received since April. On the buy side, A R Accessories alone took 32% of supplier payments. No OEM, EV-fleet or service-centre supplier appears.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Show customers or suppliers">
+        <button type="button" aria-pressed="true" data-cp="cust">Customers (money in)</button>
+        <button type="button" aria-pressed="false" data-cp="supp">Suppliers (money out)</button>
+      </div>
+      <span class="note">Bank flows 1 Apr–4 Oct 2026, ₹ lakh incl. GST</span>
+    </div>
+    <div class="bars-h" id="cpBars"></div>
+    <h3>Customer profiles</h3>
+    <div class="grid2" id="custCards"></div>
+    <h3>Suppliers by type</h3>
+    <div class="grid2">
+      <div class="box"><h4>Black mass producers and recyclers</h4><p>Mush Ecotech ₹2.81 Cr · Remine India ₹2.65 Cr (several advances) · Ecobat Energies ₹1.36 Cr (₹35 L advance in May) · Elementre Technologies ₹1.27 Cr (also a testing credit) · Lithbat Solutions ₹1.10 Cr · Prithvi Cleantech ₹81 L · Metareclaim India ₹44 L</p></div>
+      <div class="box"><h4>Traders and aggregators</h4><p>A R Accessories ₹6.92 Cr (Jul–Sep, paired with Navprakriti) · Riya Enterprises ₹1.11 Cr · MS Traders ₹86 L · S K Enterprises ₹65 L · J S R Traders ₹50 L · RA Traders ₹40 L · Saroj Traders ₹33 L · F L India Traders ₹29 L · Malik Traders ₹10 L</p></div>
+    </div>
+    <h3>Which buyer's money paid which supplier</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Customer</th><th>Suppliers paid from its receipts (same or next day)</th></tr></thead>
+      <tbody>
+        <tr><td>Metalux Energy</td><td>Riya Enterprises, MS Traders, Metareclaim, RA Traders, F L India, Saroj, S K Enterprises, J S R, Malik</td></tr>
+        <tr><td>Minimines Cleantech</td><td>Prithvi Cleantech, Ecobat, Elementre, Remine India, Mush Ecotech</td></tr>
+        <tr><td>Navprakriti Green Energies</td><td>A R Accessories, Lithbat Solutions</td></tr>
+        <tr><td>Rocklink India</td><td>Elementre, Remine India</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 10 TRANSACTIONS -->
+  <section class="card" id="transactions" aria-labelledby="h-tx">
+    <div class="sec-head"><span class="tag">10 · Transaction explorer</span><h2 id="h-tx">Every bank transaction, 1 Apr–4 Oct 2026</h2></div>
+    <p class="answer">All 228 categorised HDFC transactions from the cash-flow file. Filter by category, month, direction or counterparty; totals update as you filter.</p>
+    <form class="controls" id="txForm" role="search" aria-label="Filter transactions">
+      <label class="f" for="txQ">Counterparty<input type="search" id="txQ" placeholder="e.g. Navprakriti"></label>
+      <label class="f" for="txCat">Category<select id="txCat"><option value="">All categories</option></select></label>
+      <label class="f" for="txMon">Month<select id="txMon"><option value="">All months</option></select></label>
+      <label class="f" for="txDir">Direction<select id="txDir"><option value="">In and out</option><option value="in">Money in</option><option value="out">Money out</option></select></label>
+      <label class="f" for="txMin">Minimum amount<select id="txMin"><option value="0">Any</option><option value="100000">₹1 L+</option><option value="1000000">₹10 L+</option><option value="5000000">₹50 L+</option></select></label>
+    </form>
+    <div class="sum-row" aria-live="polite" id="txSum"></div>
+    <div class="tx-wrap"><table>
+      <thead><tr><th>Date</th><th>Counterparty</th><th>Category</th><th class="n">In (₹)</th><th class="n">Out (₹)</th><th class="n">Balance (₹)</th></tr></thead>
+      <tbody id="txBody"></tbody>
+    </table></div>
+  </section>
+
+  <!-- 11 EXPORTS -->
+  <section class="card" id="exports" aria-labelledby="h-exp">
+    <div class="sec-head"><span class="tag">11 · Export pipeline</span><h2 id="h-exp">Two overseas enquiries for products BME does not yet make</h2></div>
+    <p class="answer">Business development is offering nickel and cobalt sulphates, lithium hydroxide and carbonate, and MHP. A Chinese lithium company wants 20 t Li₂CO₃ containers. A Turkish chemical distributor wants 60 MT cobalt sulphate at $9,000/MT. Neither deal had closed by 28 September, and both buyers want samples of stock that a bench-scale R&amp;D programme cannot produce.</p>
+    <div class="grid2">
+      <div class="box">
+        <h4>Sichuan Aoris Lithium Industry Co. · China</h4>
+        <dl class="kv"><dt>Contact</dt><dd>Menglun Li, International Trade &amp; BD</dd><dt>Factory</dt><dd>Guizhou Tianmei Lithium Energy New Materials</dd><dt>Product</dt><dd>Li₂CO₃, ~20 t (one container) per contract, recurring</dd><dt>Price</dt><dd>SMM index, adjusted for test results</dd><dt>Terms</dt><dd>10% advance by T/T; 90% against scanned master Bill of Lading</dd></dl>
+        <div class="timeline">
+          <div class="ev"><div class="d">23 Sep 14:20</div>Buyer "very interested"; proposes terms.</div>
+          <div class="ev"><div class="d">23 Sep 16:51</div>BME introduces CEO/CTO, shares a Li₂CO₃ Certificate of Analysis; buyer asks for 2 × 500 g samples from two batches.</div>
+          <div class="ev"><div class="d">23 Sep 17:13</div>Buyer: after sample tests, only price remains.</div>
+          <div class="ev key"><div class="d">25 Sep</div>BME asks for an indicative price before shipping samples; buyer on holiday, promises reply next Monday.</div>
+        </div>
+      </div>
+      <div class="box">
+        <h4>LapisChem · Türkiye</h4>
+        <dl class="kv"><dt>Contact</dt><dd>Ayben Başoğul, Executive Export Sales</dd><dt>Profile</dt><dd>Chemical supplier claiming ~70% share of Türkiye's mining-chemicals market</dd><dt>Products</dt><dd>Nickel sulphate, cobalt sulphate, LiOH, Li₂CO₃</dd><dt>Ask</dt><dd>60 MT cobalt sulphate: confirm 40 MT in stock, 20 MT within a month</dd><dt>Target price</dt><dd>$9,000/MT FOB Indian port, 25 kg unbranded bags (BME quoted higher)</dd></dl>
+        <div class="timeline">
+          <div class="ev"><div class="d">24 Sep</div>BME cold outreach with product list; LapisChem replies, books a meeting.</div>
+          <div class="ev"><div class="d">25 Sep</div>Meeting held (BD lead joined from hospital). LapisChem asks for stock confirmation, 1 kg sample, profile, facility visit.</div>
+          <div class="ev key"><div class="d">28 Sep</div>Reminder from LapisChem. No reply in the thread.</div>
+        </div>
+      </div>
+    </div>
+    <div class="box soft"><h4>Diligence point</h4><p>The Li₂CO₃ Certificate of Analysis and any cobalt sulphate "in stock" must come from a third-party producer, so the export line would also be trading. Ask who made the material behind the COA, and whether BME has an Importer-Exporter Code and the licences to ship it.</p></div>
+  </section>
+
+  <!-- 12 IP -->
+  <section class="card" id="ip" aria-labelledby="h-ip">
+    <div class="sec-head"><span class="tag">12 · Patent and IP</span><h2 id="h-ip">One provisional filing, close prior art, outside inventor</h2></div>
+    <p class="answer">Indian application 202641111332 was filed on 16 September 2026 with a provisional specification. Its own disclosure lists a 2021 US filing as "very closely related". Novelty rests on the order of steps, and no inventor-to-company assignment is in the data room.</p>
+    <div class="grid2">
+      <div class="box"><h4>Filing details</h4><dl class="kv"><dt>Application</dt><dd class="mono">202641111332</dd><dt>Type</dt><dd>Ordinary, provisional specification, no priority</dd><dt>Title</dt><dd>Method for Recovering Valuable Materials from Lithium-Ion Battery Black Mass</dd><dt>Applicant</dt><dd>Black Mass Energies Pvt Ltd</dd><dt>Inventor</dt><dd>Dr. Dhanasekar Kesavan (Korea-resident Indian citizen)</dd><dt>Agent</dt><dd>IPFlair Consulting, Bengaluru (₹11 K paid)</dd><dt>Fee</dt><dd>₹1,600 (startup rate)</dd></dl></div>
+      <div class="box"><h4>Deadlines from the receipt</h4><div class="timeline">
+        <div class="ev"><div class="d">16 Sep 2026</div>Provisional filed.</div>
+        <div class="ev key"><div class="d">16 Sep 2027</div>Complete specification due, or deemed abandoned (s.9(1)).</div>
+        <div class="ev"><div class="d">~Mar 2028</div>Published 18 months from filing unless withdrawn within 15 months.</div>
+        <div class="ev"><div class="d">~Apr 2029</div>Request for examination (Form 18/18A) due within 31 months (s.11B(4)).</div>
+      </div></div>
+    </div>
+    <h3>Prior art listed in the disclosure itself</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Reference</th><th>Priority</th><th>Overlap with BME's process</th><th>Closeness</th></tr></thead>
+      <tbody>
+        <tr><td>US20240055685A1</td><td>Feb 2021</td><td>Thermal reduction at 500–1,000 °C using the black mass's own graphite; water extraction of lithium; magnetic separation of Ni–Co from graphite</td><td><span class="chip bad">Very close</span></td></tr>
+        <tr><td>WO2026047775A1</td><td>Sep 2024</td><td>Carbothermic step at 600–660 °C to Li₂CO₃; water leach; H₂ roasting keeps Mn as oxide; magnetic + density split</td><td><span class="chip bad">Very close</span></td></tr>
+        <tr><td>WO2023045331A1</td><td>Sep 2021</td><td>Roasting + water leach for Li₂CO₃; residue processed for Mn, Ni, Co, graphite</td><td><span class="chip warn">Close</span></td></tr>
+        <tr><td>EP3688834A1, EP3202928A1</td><td>2014 onward</td><td>Conventional mechanical + hydromet recycling routes</td><td><span class="chip neutral">Background</span></td></tr>
+        <tr><td>Journal papers 2009–2026</td><td>—</td><td>NaOH removal of Al (2009); carbothermic phase changes (2019, 2021, 2025); citric acid dissolving &gt;95% MnO with &lt;5% Ni–Co (2026)</td><td><span class="chip warn">Each step published</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">The claimed novelty is the combination: aluminium removed by NaOH before heating, then a single organic-acid leach to split MnO from the Ni–Co alloy. The disclosure states that "actual novelty must be confirmed through a prior-art search".</p>
+  </section>
+
+  <!-- 13 CLAIMS -->
+  <section class="card" id="claims" aria-labelledby="h-claims">
+    <div class="sec-head"><span class="tag">13 · Deck claims check</span><h2 id="h-claims">How each pitch claim holds up against the documents</h2></div>
+    <p class="answer">Of 12 deck claims tested, 2 are supported by the data room, 3 partly and 7 are not supported. Revenue growth is real. Margins, sourcing model, inventory ownership, export readiness and technology maturity are overstated.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Filter claims by verdict" id="claimSeg">
+        <button type="button" aria-pressed="true" data-v="all">All</button>
+        <button type="button" aria-pressed="false" data-v="good">Supported</button>
+        <button type="button" aria-pressed="false" data-v="warn">Partly</button>
+        <button type="button" aria-pressed="false" data-v="bad">Not supported</button>
+      </div>
+    </div>
+    <div class="risks" id="claimList"></div>
+  </section>
+
+  <!-- 14 RISKS -->
+  <section class="card" id="risks" aria-labelledby="h-risks">
+    <div class="sec-head"><span class="tag">14 · Risks and questions</span><h2 id="h-risks">What could break the thesis, and what to ask</h2></div>
+    <p class="answer">The biggest risks are that the trading spread cannot widen, that refining never leaves the bench, and that the pass-through flows hide margin or related-party activity. Each maps to a question for the company below.</p>
+    <div class="risks" id="riskList"></div>
+    <h3>Questions to send via Samaveda</h3>
+    <p class="note">Tick items as you get answers. Ticks are saved in this browser only.</p>
+    <ul class="check" id="qList"></ul>
+    <div class="grid2">
+      <div class="box soft"><h4>What would make it investable</h4><ul class="clean"><li>Lot-level proof that buying earlier in the chain (scrap, not finished black mass) widens margin toward the deck's 2–10%.</li><li>A chosen chemistry, costed pilot capex and recovery data beyond bench scale, ideally meeting the CMRIS 80% / 99% bar.</li><li>One signed offtake for refined product.</li></ul></div>
+      <div class="box soft"><h4>Bottom line for the team</h4><p>Credible, honest-looking operators with a real, cash-reconciled trading business. The ₹20 Cr is a bet on a refinery that is still at bench stage. Price and structure should reflect that, for example tranching R&amp;D money against pilot milestones.</p></div>
+    </div>
+  </section>
+
+  <!-- 15 GLOSSARY -->
+  <section class="card" id="glossary" aria-labelledby="h-gl">
+    <div class="sec-head"><span class="tag">15 · Glossary</span><h2 id="h-gl">Terms used on this page</h2></div>
+    <dl class="gloss">
+      <div><dt>Black mass</dt><dd>Powder from shredded Li-ion cells: cathode metals plus graphite. Feedstock for refiners.</dd></div>
+      <div><dt>Hydromet (hydrometallurgy)</dt><dd>Recovering metals by leaching them into solution with acids or other chemicals, then purifying and precipitating them.</dd></div>
+      <div><dt>Carbothermic reduction</dt><dd>Heating with carbon (here, the battery's own graphite) to strip oxygen from metal oxides, turning them into metals or simpler compounds.</dd></div>
+      <div><dt>LFP / NMC</dt><dd>Lithium iron phosphate and nickel-manganese-cobalt cathode chemistries. NMC black mass is worth more per tonne.</dd></div>
+      <div><dt>MHP</dt><dd>Mixed hydroxide precipitate: a nickel–cobalt intermediate sold to refiners.</dd></div>
+      <div><dt>Payable</dt><dd>Share of contained metal value a buyer pays for black mass, set after assay.</dd></div>
+      <div><dt>R2 / R4 recycler</dt><dd>R2 dismantles and separates to black mass. R4 runs end to end, including refining to metals or salts.</dd></div>
+      <div><dt>EPR</dt><dd>Extended Producer Responsibility: battery producers must fund collection and recycling, proven with certificates from registered recyclers.</dd></div>
+      <div><dt>CMRIS</dt><dd>Critical Mineral Recycling Incentive Scheme, ₹1,500 Cr, capex and opex subsidies for refiners only.</dd></div>
+      <div><dt>SMM</dt><dd>Shanghai Metals Market, a price-reporting agency used as an index in contracts.</dd></div>
+      <div><dt>FOB / T/T / B/L</dt><dd>Free on board (seller delivers to the ship) / telegraphic bank transfer / Bill of Lading, the shipping title document.</dd></div>
+      <div><dt>COA</dt><dd>Certificate of Analysis: lab report on a product's composition and purity.</dd></div>
+      <div><dt>FC-GPR / FIRC</dt><dd>RBI filing after issuing shares to a foreign investor / bank certificate proving inward foreign remittance.</dd></div>
+      <div><dt>MIS</dt><dd>Management information system: the company's internal monthly report.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 16 SOURCES -->
+  <section class="card" id="sources" aria-labelledby="h-src">
+    <div class="sec-head"><span class="tag">16 · Sources</span><h2 id="h-src">Where every number comes from</h2></div>
+    <p>Company figures come from the seven data-room documents listed in the overview, provided by Samaveda Capital and not independently verified. Market, policy and competitor facts come from these public pages:</p>
+    <ul class="clean">
+      <li><a href="https://www.argusmedia.com/de/news-and-insights/latest-market-news/2586514-india-s-attero-to-expand-lithium-ion-recycling-capacity">Argus: Attero to expand Li-ion recycling capacity</a></li>
+      <li><a href="https://www.energetica-india.net/news/attero-to-invest-inr-150-crore-to-expand-e-waste-copper-and-lithium-ion-battery-recycling">Energetica India: Attero ₹150 Cr expansion (Dec 2025)</a></li>
+      <li><a href="https://news.metal.com/en/newscontent/104037699-lohum-cleantech-raises-₹230-crore-to-expand-battery-recycling-business">SMM: Lohum raises ₹230 Cr (Aug 2026)</a></li>
+      <li><a href="https://www.mercomindia.com/lohum-secures-series-b-funding">Mercom: Lohum $54M Series B</a></li>
+      <li><a href="https://www.autocarpro.in/news/minimines-to-establish-%e2%82%b9350-crore-critical-minerals-refining-complex-in-karnataka-129975?amp=1">Autocar Pro: MiniMines ₹350 Cr refining complex</a></li>
+      <li><a href="https://www.energetica-india.net/news/minimines-secures-indian-patent-for-hybrid-hydrometallurgy-technology-for-lithium-ion-battery-recycling">Energetica India: MiniMines HHM patent (Aug 2026)</a></li>
+      <li><a href="https://www.recyclingtoday.com/news/recyclekaro-expands-recycling-capacity">Recycling Today: Recyclekaro expands to 10,000 MT battery capacity</a></li>
+      <li><a href="https://evreporter.com/?p=21271">EVreporter: Recyclekaro operations, Evergreen Lithium Recycling address</a></li>
+      <li><a href="https://www.pv-magazine-india.com/press-releases/metastable-materials-raises-seed-funding-by-sequoia-indias-surge-speciale-invest-and-theia-ventures">pv magazine India: Metastable Materials seed round</a></li>
+      <li><a href="https://evreporter.com/government-tightens-lithium-ion-battery-black-mass-export-curbs-stakeholders-share-perspective/">EVreporter: black mass export curbs, industry views</a></li>
+      <li><a href="https://evreporter.com/indian-lithium-ion-battery-recyclers-are-allegedly-dodging-the-black-mass-export-ban-again/">EVreporter: HS 8549, MoEF&amp;CC and DGFT licence requirement</a></li>
+      <li><a href="https://www.indialaw.in/blog/regulatory/%e2%82%b91500-cr-recycling-scheme-unveiled-under-critical-mineral-mission/pdf/">IndiaLaw: CMRIS eligibility (R3/R4, 80% yield, 99% purity)</a></li>
+      <li><a href="https://themachinemaker.com/news/cabinet-clears-%E2%82%B91500-crore-scheme-to-boost-critical-mineral-recycling">The Machine Maker: CMRIS caps and exclusion of black-mass-only players</a></li>
+      <li><a href="https://www.policyedge.in/p/rajya-sabha-q-and-a-driving-sustainability">The Policy Edge: BWMR recovery targets 70% → 90%</a></li>
+      <li><a href="https://www.recyclekaro.com/?p=5749">Recyclekaro: black mass economics, Nov 2025 Korean payables</a></li>
+    </ul>
+  </section>
+
+  </main>
+</div>
+<footer>Prepared for internal investment-team review. Company data is management-provided and unaudited; external facts as of the linked sources.</footer>
+
+<script>
+const TX = [{"d": "2026-04-07", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 16.52, "in": 0, "bal": 51858.22, "sec": "Operating"}, {"d": "2026-04-07", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 17.7, "in": 0, "bal": 51840.52, "sec": "Operating"}, {"d": "2026-04-09", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 982909.91, "bal": 1034750.43, "sec": "Operating"}, {"d": "2026-04-09", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 431.09, "bal": 1035181.52, "sec": "Operating"}, {"d": "2026-04-09", "cp": "Metareclaim India", "cat": "Payments to suppliers", "out": 981996.0, "in": 0, "bal": 53185.52, "sec": "Operating"}, {"d": "2026-04-15", "cp": "Shivam Kumar Gupta", "cat": "Director loan / promoter account (net)", "out": 0, "in": 10500.0, "bal": 63685.52, "sec": "Financing"}, {"d": "2026-04-15", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 10500.0, "in": 0, "bal": 53185.52, "sec": "Operating"}, {"d": "2026-04-18", "cp": "Razorpay (goods & services)", "cat": "Other operating expenses (services, travel, misc.)", "out": 18020.0, "in": 0, "bal": 35165.52, "sec": "Operating"}, {"d": "2026-04-19", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 4306950.0, "bal": 4342115.52, "sec": "Operating"}, {"d": "2026-04-19", "cp": "Riya Enterprises", "cat": "Payments to suppliers", "out": 4301407.0, "in": 0, "bal": 40708.52, "sec": "Operating"}, {"d": "2026-04-20", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 8619629.0, "bal": 8660337.52, "sec": "Operating"}, {"d": "2026-04-20", "cp": "Shri Sai Kripa Caterers", "cat": "Other operating expenses (services, travel, misc.)", "out": 568.0, "in": 0, "bal": 8659769.52, "sec": "Operating"}, {"d": "2026-04-20", "cp": "Shri Sai Kripa Caterers", "cat": "Other operating expenses (services, travel, misc.)", "out": 350.0, "in": 0, "bal": 8659419.52, "sec": "Operating"}, {"d": "2026-04-20", "cp": "MS Traders", "cat": "Payments to suppliers", "out": 8613746.0, "in": 0, "bal": 45673.52, "sec": "Operating"}, {"d": "2026-04-20", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.0, "in": 0, "bal": 45671.52, "sec": "Operating"}, {"d": "2026-04-21", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 755.0, "in": 0, "bal": 44916.52, "sec": "Operating"}, {"d": "2026-04-22", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 0, "in": 2.0, "bal": 44918.52, "sec": "Operating"}, {"d": "2026-04-25", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 44865.42, "sec": "Operating"}, {"d": "2026-04-27", "cp": "Gurucharan Singh", "cat": "Equity capital raised (share issue)", "out": 0, "in": 10000000.0, "bal": 10044865.42, "sec": "Financing"}, {"d": "2026-04-28", "cp": "Lovesh Rawat (scrap samples)", "cat": "Other operating expenses (services, travel, misc.)", "out": 3000.0, "in": 0, "bal": 10041865.42, "sec": "Operating"}, {"d": "2026-04-29", "cp": "Capeasy Solutions", "cat": "Other operating expenses (services, travel, misc.)", "out": 35000.0, "in": 0, "bal": 10006865.42, "sec": "Operating"}, {"d": "2026-05-01", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 10006812.32, "sec": "Operating"}, {"d": "2026-05-12", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 2000000.0, "in": 0, "bal": 8006812.32, "sec": "Operating"}, {"d": "2026-05-14", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 2934725.0, "bal": 10941537.32, "sec": "Operating"}, {"d": "2026-05-14", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 3715.0, "bal": 10945252.32, "sec": "Operating"}, {"d": "2026-05-14", "cp": "F L India Traders", "cat": "Payments to suppliers", "out": 2934725.0, "in": 0, "bal": 8010527.32, "sec": "Operating"}, {"d": "2026-05-15", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 7499444.0, "bal": 15509971.32, "sec": "Operating"}, {"d": "2026-05-15", "cp": "Prithvi Cleantech", "cat": "Payments to suppliers", "out": 7740394.0, "in": 0, "bal": 7769577.32, "sec": "Operating"}, {"d": "2026-05-19", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 4012656.0, "bal": 11782233.32, "sec": "Operating"}, {"d": "2026-05-19", "cp": "RA Traders", "cat": "Payments to suppliers", "out": 4007547.0, "in": 0, "bal": 7774686.32, "sec": "Operating"}, {"d": "2026-05-19", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 950000.0, "in": 0, "bal": 6824686.32, "sec": "Operating"}, {"d": "2026-05-19", "cp": "Inspectorate Griffith India", "cat": "Testing & inspection charges", "out": 6903.0, "in": 0, "bal": 6817783.32, "sec": "Operating"}, {"d": "2026-05-20", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 550000.0, "in": 0, "bal": 6267783.32, "sec": "Operating"}, {"d": "2026-05-21", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1294175.0, "bal": 7561958.32, "sec": "Operating"}, {"d": "2026-05-21", "cp": "Metareclaim India", "cat": "Payments to suppliers", "out": 1294175.0, "in": 0, "bal": 6267783.32, "sec": "Operating"}, {"d": "2026-05-22", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.12, "in": 0, "bal": 6267781.2, "sec": "Operating"}, {"d": "2026-05-22", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 1051287.0, "bal": 7319068.2, "sec": "Operating"}, {"d": "2026-05-22", "cp": "Prithvi Cleantech", "cat": "Payments to suppliers", "out": 353029.0, "in": 0, "bal": 6966039.2, "sec": "Operating"}, {"d": "2026-05-24", "cp": "Remine India", "cat": "Payments to suppliers", "out": 10.0, "in": 0, "bal": 6966029.2, "sec": "Operating"}, {"d": "2026-05-24", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 6961029.2, "sec": "Operating"}, {"d": "2026-05-24", "cp": "Remine India", "cat": "Payments to suppliers", "out": 500000.0, "in": 0, "bal": 6461029.2, "sec": "Operating"}, {"d": "2026-05-24", "cp": "Shivam Kumar Gupta", "cat": "Director loan / promoter account (net)", "out": 5500.0, "in": 0, "bal": 6455529.2, "sec": "Financing"}, {"d": "2026-05-25", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1352398.0, "bal": 7807927.2, "sec": "Operating"}, {"d": "2026-05-25", "cp": "Metareclaim India", "cat": "Payments to suppliers", "out": 1352398.0, "in": 0, "bal": 6455529.2, "sec": "Operating"}, {"d": "2026-05-25", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 6455476.1, "sec": "Operating"}, {"d": "2026-05-27", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 11455476.1, "sec": "Operating"}, {"d": "2026-05-27", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 6561886.0, "bal": 18017362.1, "sec": "Operating"}, {"d": "2026-05-27", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 7942752.0, "in": 0, "bal": 10074610.1, "sec": "Operating"}, {"d": "2026-05-28", "cp": "Capeasy Solutions", "cat": "Other operating expenses (services, travel, misc.)", "out": 70000.0, "in": 0, "bal": 10004610.1, "sec": "Operating"}, {"d": "2026-05-28", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 2300000.0, "bal": 12304610.1, "sec": "Operating"}, {"d": "2026-05-28", "cp": "Riya Enterprises", "cat": "Payments to suppliers", "out": 2300000.0, "in": 0, "bal": 10004610.1, "sec": "Operating"}, {"d": "2026-05-29", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 12290.0, "in": 0, "bal": 9992320.1, "sec": "Operating"}, {"d": "2026-05-29", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 360000.0, "bal": 10352320.1, "sec": "Operating"}, {"d": "2026-05-29", "cp": "Riya Enterprises", "cat": "Payments to suppliers", "out": 360000.0, "in": 0, "bal": 9992320.1, "sec": "Operating"}, {"d": "2026-05-30", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 1.42, "in": 0, "bal": 9992318.68, "sec": "Operating"}, {"d": "2026-05-30", "cp": "Shashank Chaurasia (staff)", "cat": "Salaries & staff payments", "out": 100000.0, "in": 0, "bal": 9892318.68, "sec": "Operating"}, {"d": "2026-05-30", "cp": "Shivam Kumar Gupta", "cat": "Salaries & staff payments", "out": 100000.0, "in": 0, "bal": 9792318.68, "sec": "Operating"}, {"d": "2026-05-31", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 9792312.78, "sec": "Operating"}, {"d": "2026-05-31", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 9792306.88, "sec": "Operating"}, {"d": "2026-05-31", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.96, "in": 0, "bal": 9792303.92, "sec": "Operating"}, {"d": "2026-06-01", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 9792250.82, "sec": "Operating"}, {"d": "2026-06-02", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 9792244.92, "sec": "Operating"}, {"d": "2026-06-02", "cp": "Marpuri Lokabiram (staff)", "cat": "Salaries & staff payments", "out": 9333.0, "in": 0, "bal": 9782911.92, "sec": "Operating"}, {"d": "2026-06-02", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 3000.0, "in": 0, "bal": 9779911.92, "sec": "Operating"}, {"d": "2026-06-05", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 2300000.0, "bal": 12079911.92, "sec": "Operating"}, {"d": "2026-06-05", "cp": "Riya Enterprises", "cat": "Payments to suppliers", "out": 2300000.0, "in": 0, "bal": 9779911.92, "sec": "Operating"}, {"d": "2026-06-06", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1800000.0, "bal": 11579911.92, "sec": "Operating"}, {"d": "2026-06-06", "cp": "Riya Enterprises", "cat": "Payments to suppliers", "out": 1800000.0, "in": 0, "bal": 9779911.92, "sec": "Operating"}, {"d": "2026-06-07", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 13587.0, "bal": 9793498.92, "sec": "Operating"}, {"d": "2026-06-09", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1000000.0, "bal": 10793498.92, "sec": "Operating"}, {"d": "2026-06-09", "cp": "Malik Traders", "cat": "Payments to suppliers", "out": 1000000.0, "in": 0, "bal": 9793498.92, "sec": "Operating"}, {"d": "2026-06-10", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 8000.0, "in": 0, "bal": 9785498.92, "sec": "Operating"}, {"d": "2026-06-10", "cp": "Remine India", "cat": "Payments to suppliers", "out": 9500000.0, "in": 0, "bal": 285498.92, "sec": "Operating"}, {"d": "2026-06-10", "cp": "Evergreen Lithium Recycling", "cat": "Receipts from customers", "out": 0, "in": 10889416.0, "bal": 11174914.92, "sec": "Operating"}, {"d": "2026-06-10", "cp": "Remine India", "cat": "Payments to suppliers", "out": 717969.0, "in": 0, "bal": 10456945.92, "sec": "Operating"}, {"d": "2026-06-11", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 791839.0, "bal": 11248784.92, "sec": "Operating"}, {"d": "2026-06-11", "cp": "Metareclaim India", "cat": "Payments to suppliers", "out": 790895.0, "in": 0, "bal": 10457889.92, "sec": "Operating"}, {"d": "2026-06-11", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 8260.0, "in": 0, "bal": 10449629.92, "sec": "Operating"}, {"d": "2026-06-14", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 10449576.82, "sec": "Operating"}, {"d": "2026-06-14", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 10449523.72, "sec": "Operating"}, {"d": "2026-06-15", "cp": "Saroj Traders", "cat": "Payments to suppliers", "out": 3327600.0, "in": 0, "bal": 7121923.72, "sec": "Operating"}, {"d": "2026-06-15", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 3332037.0, "bal": 10453960.72, "sec": "Operating"}, {"d": "2026-06-15", "cp": "Elementre Technologies", "cat": "Payments to suppliers", "out": 10.0, "in": 0, "bal": 10453950.72, "sec": "Operating"}, {"d": "2026-06-15", "cp": "Elementre Technologies", "cat": "Payments to suppliers", "out": 1600000.0, "in": 0, "bal": 8853950.72, "sec": "Operating"}, {"d": "2026-06-16", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.96, "in": 0, "bal": 8853947.76, "sec": "Operating"}, {"d": "2026-06-16", "cp": "Elementre Technologies", "cat": "Payments to suppliers", "out": 4529475.0, "in": 0, "bal": 4324472.76, "sec": "Operating"}, {"d": "2026-06-16", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 5917994.0, "bal": 10242466.76, "sec": "Operating"}, {"d": "2026-06-17", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.0, "in": 0, "bal": 10242464.76, "sec": "Operating"}, {"d": "2026-06-17", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 1488.9, "in": 0, "bal": 10240975.86, "sec": "Operating"}, {"d": "2026-06-19", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 0, "in": 2.0, "bal": 10240977.86, "sec": "Operating"}, {"d": "2026-06-20", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 2054791.0, "in": 0, "bal": 8186186.86, "sec": "Operating"}, {"d": "2026-06-20", "cp": "Razorpay (goods & services)", "cat": "Other operating expenses (services, travel, misc.)", "out": 8986.0, "in": 0, "bal": 8177200.86, "sec": "Operating"}, {"d": "2026-06-21", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 13177200.86, "sec": "Operating"}, {"d": "2026-06-21", "cp": "J S R Traders", "cat": "Payments to suppliers", "out": 5000000.0, "in": 0, "bal": 8177200.86, "sec": "Operating"}, {"d": "2026-06-21", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 400000.0, "bal": 8577200.86, "sec": "Operating"}, {"d": "2026-06-25", "cp": "Inspectorate Griffith India", "cat": "Testing & inspection charges", "out": 6903.0, "in": 0, "bal": 8570297.86, "sec": "Operating"}, {"d": "2026-06-26", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.0, "in": 0, "bal": 8570295.86, "sec": "Operating"}, {"d": "2026-06-28", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 0, "in": 2.0, "bal": 8570297.86, "sec": "Operating"}, {"d": "2026-06-29", "cp": "Inspectorate Griffith India", "cat": "Testing & inspection charges", "out": 2655.0, "in": 0, "bal": 8567642.86, "sec": "Operating"}, {"d": "2026-06-29", "cp": "Abhishek Agarwal", "cat": "Equity capital raised (share issue)", "out": 0, "in": 500000.0, "bal": 9067642.86, "sec": "Financing"}, {"d": "2026-06-30", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 20235.0, "in": 0, "bal": 9047407.86, "sec": "Operating"}, {"d": "2026-06-30", "cp": "Marpuri Lokabiram (staff)", "cat": "Salaries & staff payments", "out": 8700.0, "in": 0, "bal": 9038707.86, "sec": "Operating"}, {"d": "2026-06-30", "cp": "Shashank Chaurasia (staff)", "cat": "Salaries & staff payments", "out": 104000.0, "in": 0, "bal": 8934707.86, "sec": "Operating"}, {"d": "2026-06-30", "cp": "Shivam Kumar Gupta", "cat": "Salaries & staff payments", "out": 150000.0, "in": 0, "bal": 8784707.86, "sec": "Operating"}, {"d": "2026-07-01", "cp": "HDFC Bank (FD)", "cat": "Fixed deposits placed", "out": 5000000.0, "in": 0, "bal": 3784707.86, "sec": "Investing"}, {"d": "2026-07-01", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 150000.0, "bal": 3934707.86, "sec": "Operating"}, {"d": "2026-07-03", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 3934701.96, "sec": "Operating"}, {"d": "2026-07-04", "cp": "Elementre Technologies", "cat": "Other operating receipts (refunds, test credits)", "out": 0, "in": 4779.0, "bal": 3939480.96, "sec": "Operating"}, {"d": "2026-07-06", "cp": "Elementre Technologies", "cat": "Payments to suppliers", "out": 262750.0, "in": 0, "bal": 3676730.96, "sec": "Operating"}, {"d": "2026-07-06", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1000000.0, "bal": 4676730.96, "sec": "Operating"}, {"d": "2026-07-06", "cp": "S K Enterprises", "cat": "Payments to suppliers", "out": 1000000.0, "in": 0, "bal": 3676730.96, "sec": "Operating"}, {"d": "2026-07-06", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 3677110.0, "bal": 7353840.96, "sec": "Operating"}, {"d": "2026-07-06", "cp": "S K Enterprises", "cat": "Payments to suppliers", "out": 3671189.0, "in": 0, "bal": 3682651.96, "sec": "Operating"}, {"d": "2026-07-07", "cp": "JOL Energy", "cat": "Receipts from customers", "out": 0, "in": 5900.0, "bal": 3688551.96, "sec": "Operating"}, {"d": "2026-07-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 100.0, "bal": 3688651.96, "sec": "Operating"}, {"d": "2026-07-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 8688651.96, "sec": "Operating"}, {"d": "2026-07-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 13688651.96, "sec": "Operating"}, {"d": "2026-07-07", "cp": "Lithbat Solutions", "cat": "Payments to suppliers", "out": 9901928.0, "in": 0, "bal": 3786723.96, "sec": "Operating"}, {"d": "2026-07-08", "cp": "Remine India", "cat": "Payments to suppliers", "out": 1000000.0, "in": 0, "bal": 2786723.96, "sec": "Operating"}, {"d": "2026-07-09", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 2786670.86, "sec": "Operating"}, {"d": "2026-07-10", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 2786664.96, "sec": "Operating"}, {"d": "2026-07-13", "cp": "Mush Ecotech", "cat": "Payments to suppliers", "out": 1000000.0, "in": 0, "bal": 1786664.96, "sec": "Operating"}, {"d": "2026-07-13", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 1021747.0, "bal": 2808411.96, "sec": "Operating"}, {"d": "2026-07-13", "cp": "Lithbat Solutions", "cat": "Payments to suppliers", "out": 1095771.0, "in": 0, "bal": 1712640.96, "sec": "Operating"}, {"d": "2026-07-14", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 1852600.0, "bal": 3565240.96, "sec": "Operating"}, {"d": "2026-07-14", "cp": "S K Enterprises", "cat": "Payments to suppliers", "out": 1850240.0, "in": 0, "bal": 1715000.96, "sec": "Operating"}, {"d": "2026-07-15", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 4816930.0, "bal": 6531930.96, "sec": "Operating"}, {"d": "2026-07-15", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 11531930.96, "sec": "Operating"}, {"d": "2026-07-15", "cp": "Remine India", "cat": "Payments to suppliers", "out": 8589792.0, "in": 0, "bal": 2942138.96, "sec": "Operating"}, {"d": "2026-07-16", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 413.0, "in": 0, "bal": 2941725.96, "sec": "Operating"}, {"d": "2026-07-16", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 53.1, "in": 0, "bal": 2941672.86, "sec": "Operating"}, {"d": "2026-07-19", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 7941672.86, "sec": "Operating"}, {"d": "2026-07-19", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 5000000.0, "in": 0, "bal": 2941672.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 7941672.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 6670411.0, "bal": 14612083.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 7500000.0, "bal": 22112083.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 7500000.0, "bal": 29612083.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Mush Ecotech", "cat": "Payments to suppliers", "out": 20491092.0, "in": 0, "bal": 9120991.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 5000000.0, "in": 0, "bal": 4120991.86, "sec": "Operating"}, {"d": "2026-07-20", "cp": "Metalux (Energy LLP / Saral)", "cat": "Receipts from customers", "out": 0, "in": 450000.0, "bal": 4570991.86, "sec": "Operating"}, {"d": "2026-07-21", "cp": "GST payments", "cat": "GST & statutory payments", "out": 1038276.0, "in": 0, "bal": 3532715.86, "sec": "Operating"}, {"d": "2026-07-25", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.12, "in": 0, "bal": 3532713.74, "sec": "Operating"}, {"d": "2026-07-25", "cp": "Inspectorate Griffith India", "cat": "Testing & inspection charges", "out": 32037.0, "in": 0, "bal": 3500676.74, "sec": "Operating"}, {"d": "2026-07-25", "cp": "MS Mitra S K", "cat": "Other operating expenses (services, travel, misc.)", "out": 41300.0, "in": 0, "bal": 3459376.74, "sec": "Operating"}, {"d": "2026-07-27", "cp": "Ecobat Energies", "cat": "Receipts from customers", "out": 0, "in": 2000000.0, "bal": 5459376.74, "sec": "Operating"}, {"d": "2026-07-27", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.12, "in": 0, "bal": 5459374.62, "sec": "Operating"}, {"d": "2026-07-27", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 5459368.72, "sec": "Operating"}, {"d": "2026-07-27", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 2714.0, "in": 0, "bal": 5456654.72, "sec": "Operating"}, {"d": "2026-07-28", "cp": "Ecobat Energies", "cat": "Receipts from customers", "out": 0, "in": 500000.0, "bal": 5956654.72, "sec": "Operating"}, {"d": "2026-07-28", "cp": "Remine India", "cat": "Other operating receipts (refunds, test credits)", "out": 0, "in": 230445.55, "bal": 6187100.27, "sec": "Operating"}, {"d": "2026-07-29", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 7000.0, "in": 0, "bal": 6180100.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "P2G Mobility Tech", "cat": "Other operating expenses (services, travel, misc.)", "out": 4585.0, "in": 0, "bal": 6175515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Shashank Chaurasia (staff)", "cat": "Salaries & staff payments", "out": 106000.0, "in": 0, "bal": 6069515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 20000.0, "in": 0, "bal": 6049515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Shivam Kumar Gupta", "cat": "Salaries & staff payments", "out": 105000.0, "in": 0, "bal": 5944515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 12000.0, "in": 0, "bal": 5932515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Naveen Chellapilla (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 5927515.27, "sec": "Operating"}, {"d": "2026-07-31", "cp": "Navyasri Bandari (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 5922515.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Sealine Biochem", "cat": "Receipts from customers", "out": 0, "in": 6037.0, "bal": 5928552.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Power Energy", "cat": "Receipts from customers", "out": 0, "in": 6095.0, "bal": 5934647.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 5000.0, "in": 0, "bal": 5929647.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Power Energy", "cat": "Receipts from customers", "out": 0, "in": 1097.0, "bal": 5930744.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 13570.0, "in": 0, "bal": 5917174.27, "sec": "Operating"}, {"d": "2026-08-06", "cp": "Folks House LLP", "cat": "Fundraising costs (third-party due diligence)", "out": 1750000.0, "in": 0, "bal": 4167174.27, "sec": "Financing"}, {"d": "2026-08-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 9167174.27, "sec": "Operating"}, {"d": "2026-08-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 14167174.27, "sec": "Operating"}, {"d": "2026-08-07", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 1477204.0, "bal": 15644378.27, "sec": "Operating"}, {"d": "2026-08-07", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 11451470.0, "in": 0, "bal": 4192908.27, "sec": "Operating"}, {"d": "2026-08-11", "cp": "Sealine Biochem", "cat": "Receipts from customers", "out": 0, "in": 1086.0, "bal": 4193994.27, "sec": "Operating"}, {"d": "2026-08-12", "cp": "Minimines Cleantech Solutions", "cat": "Receipts from customers", "out": 0, "in": 6700326.0, "bal": 10894320.27, "sec": "Operating"}, {"d": "2026-08-13", "cp": "MSI Cluster Techno", "cat": "Other operating expenses (services, travel, misc.)", "out": 60000.0, "in": 0, "bal": 10834320.27, "sec": "Operating"}, {"d": "2026-08-13", "cp": "Mush Ecotech", "cat": "Payments to suppliers", "out": 6579907.0, "in": 0, "bal": 4254413.27, "sec": "Operating"}, {"d": "2026-08-17", "cp": "Metalux (Energy LLP / Saral)", "cat": "Refunds to customers", "out": 450000.0, "in": 0, "bal": 3804413.27, "sec": "Operating"}, {"d": "2026-08-18", "cp": "GST payments", "cat": "GST & statutory payments", "out": 562.0, "in": 0, "bal": 3803851.27, "sec": "Operating"}, {"d": "2026-08-18", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 4.24, "in": 0, "bal": 3803847.03, "sec": "Operating"}, {"d": "2026-08-18", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 8803847.03, "sec": "Operating"}, {"d": "2026-08-18", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5589825.0, "bal": 14393672.03, "sec": "Operating"}, {"d": "2026-08-18", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 10563641.0, "in": 0, "bal": 3830031.03, "sec": "Operating"}, {"d": "2026-08-25", "cp": "Shivam Kumar Gupta", "cat": "Director loan / promoter account (net)", "out": 0, "in": 500000.0, "bal": 4330031.03, "sec": "Financing"}, {"d": "2026-08-25", "cp": "HDFC Bank (FD)", "cat": "Fixed deposits placed", "out": 500000.0, "in": 0, "bal": 3830031.03, "sec": "Investing"}, {"d": "2026-08-26", "cp": "IPFlair Consulting", "cat": "Other operating expenses (services, travel, misc.)", "out": 11040.0, "in": 0, "bal": 3818991.03, "sec": "Operating"}, {"d": "2026-08-26", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 90.0, "in": 0, "bal": 3818901.03, "sec": "Operating"}, {"d": "2026-08-26", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 90.0, "in": 0, "bal": 3818811.03, "sec": "Operating"}, {"d": "2026-08-26", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 1000.0, "in": 0, "bal": 3817811.03, "sec": "Operating"}, {"d": "2026-08-27", "cp": "UP Electronics Corporation", "cat": "Receipts from customers", "out": 0, "in": 450000.0, "bal": 4267811.03, "sec": "Operating"}, {"d": "2026-08-28", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 9267811.03, "sec": "Operating"}, {"d": "2026-08-28", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 4315007.0, "bal": 13582818.03, "sec": "Operating"}, {"d": "2026-08-28", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 9300000.0, "in": 0, "bal": 4282818.03, "sec": "Operating"}, {"d": "2026-08-29", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 590.0, "in": 0, "bal": 4282228.03, "sec": "Operating"}, {"d": "2026-08-29", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 590.0, "in": 0, "bal": 4281638.03, "sec": "Operating"}, {"d": "2026-08-30", "cp": "American Express (card bill)", "cat": "Other operating expenses (services, travel, misc.)", "out": 161000.0, "in": 0, "bal": 4120638.03, "sec": "Operating"}, {"d": "2026-08-31", "cp": "Shashank Chaurasia (staff)", "cat": "Salaries & staff payments", "out": 110000.0, "in": 0, "bal": 4010638.03, "sec": "Operating"}, {"d": "2026-08-31", "cp": "Shivam Kumar Gupta", "cat": "Salaries & staff payments", "out": 110000.0, "in": 0, "bal": 3900638.03, "sec": "Operating"}, {"d": "2026-08-31", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 11660.0, "in": 0, "bal": 3888978.03, "sec": "Operating"}, {"d": "2026-08-31", "cp": "Naveen Chellapilla (staff)", "cat": "Salaries & staff payments", "out": 10000.0, "in": 0, "bal": 3878978.03, "sec": "Operating"}, {"d": "2026-08-31", "cp": "Navyasri Bandari (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 3873978.03, "sec": "Operating"}, {"d": "2026-09-01", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 8873978.03, "sec": "Operating"}, {"d": "2026-09-01", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 4119697.0, "bal": 12993675.03, "sec": "Operating"}, {"d": "2026-09-01", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 9092647.0, "in": 0, "bal": 3901028.03, "sec": "Operating"}, {"d": "2026-09-02", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 4078866.0, "bal": 7979894.03, "sec": "Operating"}, {"d": "2026-09-02", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 12979894.03, "sec": "Operating"}, {"d": "2026-09-02", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 9052337.0, "in": 0, "bal": 3927557.03, "sec": "Operating"}, {"d": "2026-09-08", "cp": "Blue Key Ventures Technology", "cat": "Other operating expenses (services, travel, misc.)", "out": 27140.0, "in": 0, "bal": 3900417.03, "sec": "Operating"}, {"d": "2026-09-11", "cp": "Rocklink India", "cat": "Receipts from customers", "out": 0, "in": 4896452.47, "bal": 8796869.5, "sec": "Operating"}, {"d": "2026-09-11", "cp": "Elementre Technologies", "cat": "Payments to suppliers", "out": 6271901.0, "in": 0, "bal": 2524968.5, "sec": "Operating"}, {"d": "2026-09-12", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 2.84, "in": 0, "bal": 2524965.66, "sec": "Operating"}, {"d": "2026-09-12", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 3747322.0, "bal": 6272287.66, "sec": "Operating"}, {"d": "2026-09-12", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 5000000.0, "bal": 11272287.66, "sec": "Operating"}, {"d": "2026-09-12", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 8719550.0, "in": 0, "bal": 2552737.66, "sec": "Operating"}, {"d": "2026-09-21", "cp": "Inspectorate Griffith India", "cat": "Testing & inspection charges", "out": 18703.0, "in": 0, "bal": 2534034.66, "sec": "Operating"}, {"d": "2026-09-22", "cp": "Navprakriti Green Energies", "cat": "Receipts from customers", "out": 0, "in": 1000000.0, "bal": 3534034.66, "sec": "Operating"}, {"d": "2026-09-22", "cp": "A R Accessories", "cat": "Payments to suppliers", "out": 1000000.0, "in": 0, "bal": 2534034.66, "sec": "Operating"}, {"d": "2026-09-24", "cp": "Remine India", "cat": "Payments to suppliers", "out": 500000.0, "in": 0, "bal": 2034034.66, "sec": "Operating"}, {"d": "2026-09-26", "cp": "Bridgegreen 2024", "cat": "Receipts from customers", "out": 0, "in": 97940.0, "bal": 2131974.66, "sec": "Operating"}, {"d": "2026-09-26", "cp": "Ecobat Energies", "cat": "Payments to suppliers", "out": 94341.0, "in": 0, "bal": 2037633.66, "sec": "Operating"}, {"d": "2026-09-26", "cp": "Rocklink India", "cat": "Receipts from customers", "out": 0, "in": 6521095.42, "bal": 8558729.08, "sec": "Operating"}, {"d": "2026-09-26", "cp": "Remine India", "cat": "Payments to suppliers", "out": 5728255.0, "in": 0, "bal": 2830474.08, "sec": "Operating"}, {"d": "2026-09-29", "cp": "Blue Key Ventures Technology", "cat": "Other operating expenses (services, travel, misc.)", "out": 23000.0, "in": 0, "bal": 2807474.08, "sec": "Operating"}, {"d": "2026-09-30", "cp": "HDFC Bank (charges)", "cat": "Bank charges & fees", "out": 5.9, "in": 0, "bal": 2807468.18, "sec": "Operating"}, {"d": "2026-09-30", "cp": "PayU (online payment)", "cat": "Other operating expenses (services, travel, misc.)", "out": 14505.38, "in": 0, "bal": 2792962.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Vaibhav Juneja (staff)", "cat": "Salaries & staff payments", "out": 21500.0, "in": 0, "bal": 2771462.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Naveen Chellapilla (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 2766462.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Navyasri Bandari (staff)", "cat": "Salaries & staff payments", "out": 5000.0, "in": 0, "bal": 2761462.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Shashank Chaurasia (staff)", "cat": "Salaries & staff payments", "out": 105000.0, "in": 0, "bal": 2656462.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Shivam Kumar Gupta", "cat": "Salaries & staff payments", "out": 105000.0, "in": 0, "bal": 2551462.8, "sec": "Operating"}, {"d": "2026-09-30", "cp": "Others (small UPI / IMPS payments)", "cat": "Other operating expenses (services, travel, misc.)", "out": 5000.0, "in": 0, "bal": 2546462.8, "sec": "Operating"}, {"d": "2026-10-01", "cp": "HDFC Bank (FD)", "cat": "TDS deducted on FD interest", "out": 8128.8, "in": 0, "bal": 2538334.0, "sec": "Investing"}, {"d": "2026-10-01", "cp": "HDFC Bank (FD)", "cat": "Interest received on FDs", "out": 0, "in": 81288.0, "bal": 2619622.0, "sec": "Investing"}];
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const fmtL = v => (v/1e5).toLocaleString('en-IN',{maximumFractionDigits:1,minimumFractionDigits:1});
+const fmtR = v => v ? Math.round(v).toLocaleString('en-IN') : '';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* theme */
+(function(){
+  const sel = $('#themeSel');
+  let saved = ''; try { saved = localStorage.getItem('bme-theme') || ''; } catch(e){}
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  sel.value = saved;
+  sel.addEventListener('change', () => {
+    if (sel.value) document.documentElement.setAttribute('data-theme', sel.value); else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('bme-theme', sel.value); } catch(e){}
+  });
+})();
+
+/* tooltip */
+/* hover/focus/touch for chart columns: highlight column, floating tip inside chart, persistent readout below */
+function wireChart(el, tipFn, readoutEl, defaultIdx){
+  const svg = $('svg', el); let tip = $('.tip', el);
+  if(!tip){ tip = document.createElement('div'); tip.className='tip'; tip.setAttribute('aria-hidden','true'); el.appendChild(tip); }
+  const cols = $$('g.col', svg), hits = $$('rect.hit', svg);
+  function on(i, ev){
+    svg.classList.add('hovering'); cols.forEach((c,j)=>c.classList.toggle('on', j===i));
+    const html = tipFn(i); if(readoutEl) readoutEl.innerHTML = html;
+    tip.innerHTML = html; tip.style.display='block';
+    const box = el.getBoundingClientRect(); let x, y;
+    if(ev && ev.clientX!=null){ x = ev.clientX - box.left + el.scrollLeft + 14; y = ev.clientY - box.top + 14; }
+    else { const hb = hits[i].getBoundingClientRect(); x = hb.left - box.left + el.scrollLeft + hb.width/2; y = 20; }
+    x = Math.min(x, el.scrollWidth - tip.offsetWidth - 4); tip.style.left = Math.max(0,x)+'px'; tip.style.top = y+'px';
+  }
+  function off(){ svg.classList.remove('hovering'); cols.forEach(c=>c.classList.remove('on')); tip.style.display='none'; if(readoutEl && defaultIdx!=null) readoutEl.innerHTML = 'Hover or tap a bar for detail. Latest: ' + tipFn(defaultIdx); }
+  hits.forEach((h,i)=>{
+    h.setAttribute('tabindex','0'); h.setAttribute('role','button'); h.setAttribute('aria-label', tipFn(i).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim());
+    h.addEventListener('pointerenter', e=>on(i,e)); h.addEventListener('pointermove', e=>on(i,e)); h.addEventListener('pointerdown', e=>on(i,e));
+    h.addEventListener('focus', ()=>on(i)); h.addEventListener('blur', off);
+  });
+  svg.addEventListener('pointerleave', off);
+  off();
+}
+
+/* generic stepper */
+function stepper(stepsEl, panelEl, items, render){
+  stepsEl.innerHTML = items.map((it,i)=>`<button type="button" role="tab" class="step${it.dash?' dash':''}" id="${stepsEl.id}-${i}" aria-selected="${i===0}" aria-controls="${panelEl.id}" tabindex="${i===0?0:-1}"><span class="no">${it.no||String(i+1).padStart(2,'0')}</span><span class="nm">${it.name}</span><span class="sb">${it.sub||''}</span></button>`).join('');
+  const btns = $$('button', stepsEl);
+  function select(i, focus){ btns.forEach((b,j)=>{b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1;}); panelEl.setAttribute('aria-labelledby', btns[i].id); panelEl.innerHTML = render(items[i]); if(focus) btns[i].focus(); }
+  btns.forEach((b,i)=>{ b.addEventListener('click',()=>select(i)); b.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();select((i+1)%btns.length,true);} if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();select((i-1+btns.length)%btns.length,true);} }); });
+  select(0);
+}
+const panelHTML = it => `<h4>${it.name}</h4><p>${it.body}</p>${it.kv?`<dl class="kv">${it.kv.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:''}`;
+
+/* use of funds */
+(function(){
+  const rows=[['Working capital for scrap buying',40,8],['LFP hydromet R&D and pilot design',30,6],['Team: BD, ops, export compliance',20,4],['ERP, traceability, buyer portal',10,2]];
+  $('#useFunds').innerHTML = rows.map(([n,p,c],i)=>`<div class="bh" tabindex="0" title="${n}: ₹${c} Cr (${p}% of the round)"><span class="nm">${n}</span><span class="track"><span class="fill${i<2?' hl':''}" style="width:${p*2}%"></span><span class="val">${p}% · ₹${c} Cr</span></span></div>`).join('');
+})();
+
+/* value chain */
+stepper($('#vcSteps'), $('#vcPanel'), [
+  {name:'Collection', sub:'R1', body:'End-of-life packs and cells are collected from OEMs, EV fleets, service centres, cell-factory rejects and informal scrap dealers. Under EPR rules producers must route them to CPCB-registered recyclers.', kv:[['BME today','No OEM or fleet suppliers in the bank statement'],['Deck claim','Buys from OEMs, fleets, service centres at below-market rates']]},
+  {name:'Discharge & dismantle', sub:'R2', body:'Packs are electrically discharged, opened and split into modules and cells; casings, wiring and electronics are removed.', kv:[['BME today','Not done in-house'],['Who does it','Processors such as Remine India, Mush Ecotech, Lithbat (BME suppliers)']]},
+  {name:'Shred & sieve', sub:'R2 → black mass', body:'Cells are shredded, often under inert gas, then sieved and separated. Copper, aluminium and plastics come out; the fine black powder is black mass.', kv:[['BME today','Buys the finished black mass'],['Deck name','"Black mass contract manufacturing"']]},
+  {name:'Assay & trade', sub:'BME sits here', body:'Lots are sampled and tested for Li, Ni, Co, Mn, moisture and impurities. The assay sets the payable. BME pays a third-party lab (Inspectorate Griffith India), buys the lot and resells it the same or next day.', kv:[['BME today','Core business: ₹18.4 Cr revenue Apr–Sep'],['Margin','1–3% gross']]},
+  {name:'Refining', sub:'R3 / R4', body:'Hydromet or pyro/carbothermic plants turn black mass into battery-grade salts: lithium carbonate or hydroxide, nickel and cobalt sulphates, graphite.', kv:[['BME today','Bench scale only (78% Li recovery)'],['Who does it','MiniMines, Recyclekaro, Attero, Lohum (several are BME customers)']]},
+  {name:'Cell & cathode makers', sub:'End use', body:'Refined salts go into cathode active material and new cells, closing the loop. Buyers include gigafactories in India and refiners in China, Korea, Japan and the EU.', kv:[['BME today','Two overseas enquiries, no shipment']]},
+], it=>panelHTML(it));
+
+/* operations view */
+const opsViews = {
+  pitch: `<div class="flow" aria-label="Pitched value chain">
+    <div class="node off"><b>Scrap buying</b><span class="note">OEMs, EV fleets · 12–18% margin claimed</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node off"><b>Grading &amp; sorting</b><span class="note">By chemistry and state</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node on"><b>Black mass</b><span class="note">Process, assay, certify · 2–10% claimed</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node off"><b>Hydromet refining</b><span class="note">LFP → Li₂CO₃ · 35–45% claimed</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node off"><b>Export</b><span class="note">Korea, Japan, EU · 22–30% claimed</span></div></div>
+    <div class="legend"><span><i style="background:var(--accent)"></i>Running today</span><span><i style="border:1px dashed var(--graphite)"></i>Not built or no revenue yet</span></div>
+    <p class="note">The deck calls this an "inventory-led control model" in which BME owns the material at every stage and removes middlemen.</p>`,
+  actual: `<div class="flow" aria-label="Actual flow from bank statement">
+    <div class="node"><b>16 suppliers</b><span class="note">Black mass producers and traders: A R Accessories, Mush Ecotech, Remine India and others</span><span class="num">₹21.6 Cr paid out</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node on"><b>Black Mass Energies</b><span class="note">Lot assayed by Inspectorate Griffith; buyer pays and supplier is paid the same or next day</span><span class="num">1–3% gross margin</span></div><span class="arrow" aria-hidden="true">→</span>
+    <div class="node"><b>6 Indian recyclers</b><span class="note">Navprakriti, Minimines, Metalux, Rocklink, Recyclekaro, Ace Green</span><span class="num">₹21.8 Cr received</span></div></div>
+    <p class="note">No payments to OEMs, transporters, warehouses or shredding plants, and no capex. Volume is stated once in the deck as 300 MT moved; there is no tonnage or grade data in the MIS.</p>`
+};
+function setOps(v){ $$('[data-ops]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.ops===v)); $('#opsView').innerHTML = opsViews[v]; }
+$$('[data-ops]').forEach(b=>b.addEventListener('click',()=>setOps(b.dataset.ops))); setOps('pitch');
+
+stepper($('#lotSteps'), $('#lotPanel'), [
+  {name:'Find material', sub:'Supplier network', body:'BD and the CEO line up a lot from a processor or trader. Some suppliers get advances to lock material (₹35 L to Ecobat Energies in May; repeated advances to Remine India).', kv:[['Evidence','Advance payments in bank']]},
+  {name:'Sample & assay', sub:'Third-party lab', body:'Samples are drawn and tested. Bank shows five Inspectorate Griffith India bills (₹67,201), a "testing black mass" UPI (₹8,260) and paid scrap samples (₹3,000).', kv:[['Evidence','Testing payments in bank']]},
+  {name:'Agree with buyer', sub:'Price on assay', body:'A recycler agrees to buy against the assay. Contracts, offtake terms and price formulas are not in the data room.', kv:[['Evidence','Not in data room']], dash:true},
+  {name:'Buyer pays', sub:'RTGS in', body:'The customer pays by RTGS, often split into ₹50 L tranches (Navprakriti, Minimines).', kv:[['Evidence','Receipts in bank']]},
+  {name:'Supplier paid', sub:'Same or next day', body:'BME pays the supplier from the receipt, often the identical rupee amount. On 36 of 41 receipt days, at least 80% went out to suppliers within a day.', kv:[['Evidence','Payments in bank']]},
+  {name:'Material moves', sub:'Delivery', body:'Who transports the black mass, and whether it passes through BME premises, is not shown. There are no freight or warehouse payments.', kv:[['Evidence','Not in data room: ask for e-way bills']], dash:true},
+], it=>panelHTML(it));
+
+$('#pairsBody').innerHTML = [
+  ['20 Apr','Metalux Energy',8619629,'MS Traders',8613746],
+  ['14 May','Metalux Energy',2934725,'F L India Traders',2934725],
+  ['21 Jun','Metalux Energy',5000000,'J S R Traders',5000000],
+  ['7 Jul','Navprakriti Green Energies',10000100,'Lithbat Solutions',9901928],
+  ['20 Jul','Minimines Cleantech',21670411,'Mush Ecotech',20491092],
+  ['7 Aug','Navprakriti Green Energies',11477204,'A R Accessories',11451470],
+  ['26 Sep','Rocklink India',6521095,'Remine India',5728255],
+].map(([d,c,i,s,o])=>`<tr><td>${d}</td><td>${c}</td><td class="n">${fmtR(i)}</td><td>${s}</td><td class="n">${fmtR(o)}</td><td class="n">${i-o===0?'<span class="chip warn">₹0</span>':fmtR(i-o)}</td></tr>`).join('');
+
+/* route tabs */
+(function(){
+  const tabs=[$('#tabA'),$('#tabB')], panels=[$('#routeA'),$('#routeB')];
+  function sel(i,f){ tabs.forEach((t,j)=>{t.setAttribute('aria-selected',j===i);t.tabIndex=j===i?0:-1;panels[j].hidden=j!==i;}); if(f)tabs[i].focus(); }
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(i)); t.addEventListener('keydown',e=>{if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();sel(1-i,true);}});});
+  sel(0);
+})();
+stepper($('#pbSteps'), $('#pbPanel'), [
+  {name:'NaOH leach', sub:'~60 °C', body:'Black mass is washed in sodium hydroxide. Aluminium foil fragments dissolve as soluble aluminate, so aluminium cannot contaminate the alloy or consume reagent later.', kv:[['Separates by','Solubility in alkali'],['Out','Al-rich solution (impurity); Al-depleted solid onward']]},
+  {name:'Carbothermic reduction', sub:'~700 °C, inert gas', body:'The solid is heated without air. Graphite already in the black mass acts as the reducing agent, turning cathode oxide into Ni–Co metal alloy, MnO and Li₂CO₃. Most graphite stays unreacted.', kv:[['Separates by','Phase conversion'],['Out','Mixed reduced solid']]},
+  {name:'Water leach', sub:'Product 1', body:'Li₂CO₃ dissolves in water while graphite, MnO and the alloy stay solid. Lithium is recovered from solution as lithium carbonate.', kv:[['Separates by','Water solubility'],['Product','Li₂CO₃']]},
+  {name:'Dry magnetic split', sub:'Product 2', body:'The dried residue passes a magnetic separator. Non-magnetic graphite falls out as a product; the magnetic Ni–Co alloy carries MnO with it.', kv:[['Separates by','Magnetic susceptibility'],['Product','Graphite']]},
+  {name:'Organic-acid leach', sub:'Products 3 and 4', body:'A single organic-acid (citric-type) leach dissolves MnO but barely touches the alloy. Manganese is recovered from solution; Ni–Co alloy stays as a solid.', kv:[['Separates by','Chemical reactivity'],['Products','Manganese product; Ni–Co alloy']]},
+], it=>panelHTML(it));
+
+/* competition */
+const COMP = [
+  {n:'Attero Recycling', t:['refiner'], m:'Integrated e-waste and Li-ion recycler (R4)', s:'15,000 t/yr Li-ion at Roorkee; ~98% extraction claimed; 47 patents; ~30% of India\'s formal recycling market', c:'Profitable; ₹2,000 Cr and $1B expansion plans; IPO considered', r:'<span class="chip bad">Direct competitor</span> for refining'},
+  {n:'Lohum Cleantech', t:['refiner'], m:'Recycling, refining, repurposing, cathode materials', s:'Battery-grade lithium refinery launched Mar 2025; US and UAE facilities', c:'$54M Series B (2024); ₹230 Cr from Poonawalla Vision Fund (Aug 2026)', r:'<span class="chip bad">Direct competitor</span> for refining'},
+  {n:'MiniMines Cleantech', t:['refiner','customer'], m:'R4 recycler, patented Hybrid Hydrometallurgy', s:'3,000 MT plant, Bengaluru; South India\'s first CPCB R4; >96% Li/Co/Ni recovery claimed; ₹350 Cr refining complex MoU (15,000 MTPA)', c:'₹4.3 Cr grants; Maruti Suzuki collaboration', r:'<span class="chip acc">BME customer</span> ₹6.44 Cr paid; also competes on LFP R&D'},
+  {n:'Recyclekaro (Evergreen Lithium Recycling)', t:['refiner','customer'], m:'E-waste and Li-ion recycler, CPCB-registered', s:'10,000 MT/yr battery capacity, Palghar; patented LFP process >95% Li, >99.96% purity; ₹100 Cr nickel plant', c:'Not disclosed', r:'<span class="chip acc">BME customer</span> ₹1.09 Cr in June (paid as Evergreen Lithium Recycling)'},
+  {n:'Metastable Materials', t:['refiner'], m:'Carbothermal reduction recycler', s:'1,500 t/yr facility near Bengaluru (2022); "chemical-free integrated carbothermal reduction"', c:'Seed from Sequoia Surge, Speciale Invest, Theia Ventures', r:'<span class="chip bad">Same core tech</span> as BME\'s patent route'},
+  {n:'Exigo Recycling', t:['refiner'], m:'Black mass refiner', s:'7,600 MTA refining at Karnal; direct cathode-to-cathode LFP recycling', c:'Not disclosed', r:'<span class="chip warn">Competitor</span> for LFP refining'},
+  {n:'Navprakriti, Metalux, Rocklink', t:['customer'], m:'Recyclers / processors buying black mass', s:'Scale not in data room', c:'—', r:'<span class="chip acc">BME customers</span> 72% of receipts combined'},
+  {n:'Unorganised traders', t:['trader'], m:'Local scrap and black mass dealers', s:'Fragmented; many sell to BME (A R Accessories, Riya, MS Traders, S K Enterprises)', c:'—', r:'<span class="chip warn">Suppliers and rivals</span> in trading'},
+  {n:'Black Mass Energies', t:['trader'], m:'Black mass trader; refining R&D', s:'No plant; bench-scale LFP; one provisional patent', c:'₹1.05 Cr raised; raising ₹20 Cr', r:'<span class="chip neutral">Subject company</span>'},
+];
+function renderComp(f){ $$('[data-cf]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cf===f)); $('#compBody').innerHTML = COMP.filter(c=>f==='all'||c.t.includes(f)).map(c=>`<tr><td><b>${c.n}</b></td><td>${c.m}</td><td>${c.s}</td><td>${c.c}</td><td>${c.r}</td></tr>`).join(''); }
+$$('[data-cf]').forEach(b=>b.addEventListener('click',()=>renderComp(b.dataset.cf))); renderComp('all');
+
+/* revenue chart */
+const MON = ['Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
+const REV = [78.0,93.0,110.0,281.0,271.0,517.0,303.9,360.0];
+const GM = [2.14,0.73,0.90,6.825,2.51,4.97,4.70,8.80];
+const EB = [-1.36,-2.77,-2.60,3.325,-0.99,1.47,1.20,5.30];
+const BUD = [78.0,89.7,103.2,118.6,136.4,156.9,180.4,207.5];
+const NOTES = {
+  rev:'Net revenue, ₹ lakh. Dashed line: the MIS budget, a 15% month-on-month placeholder. Total ₹20.1 Cr.',
+  gm:'Gross margin, ₹ lakh. Total ₹31.6 L, or about ₹4 L a month.',
+  gmp:'Gross margin as % of revenue. Never above 2.7%; average 1.6%.',
+  ebitda:'EBITDA, ₹ lakh, after flat ₹1 L sales and ₹2.5 L overhead. Cumulative +₹3.6 L.'
+};
+function barChart(el, labels, vals, o={}){
+  const W=760,H=320,L=56,R=16,T=24,B=40;
+  const min=Math.min(0,...vals,...(o.ref||[])), max=Math.max(...vals,...(o.ref||[]))*1.12||1;
+  const y=v=>T+(max-v)/(max-min)*(H-T-B), band=(W-L-R)/vals.length, bw=band*.56;
+  const ticks=[]; const step=niceStep((max-min)/5); for(let t=Math.ceil(min/step)*step;t<=max;t+=step) ticks.push(+t.toFixed(6));
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.title||'')}">`;
+  ticks.forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L-8}" y="${y(t)+4}" text-anchor="end">${o.fmtAxis?o.fmtAxis(t):t}</text>`;});
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>`;
+  if(o.ref){ s+=`<polyline class="ref" points="${o.ref.map((v,i)=>`${L+i*band+band/2},${y(v)}`).join(' ')}"/>`; }
+  vals.forEach((v,i)=>{const x=L+i*band+(band-bw)/2, top=Math.min(y(v),y(0)), h=Math.abs(y(v)-y(0)); const cls=o.signed?(v<0?'neg':'pos'):(i===o.hl?'hl':'');
+    s+=`<g class="col"><rect class="bar ${cls}" x="${x}" y="${top}" width="${bw}" height="${Math.max(h,1)}" rx="2"/>`;
+    s+=`<text class="lbl" x="${x+bw/2}" y="${v>=0?y(v)-6:y(v)+14}" text-anchor="middle">${o.fmt(v)}</text>`;
+    s+=`<text x="${x+bw/2}" y="${H-B+18}" text-anchor="middle">${labels[i]}</text>`;
+    s+=`</g>`;});
+  vals.forEach((v,i)=>{ s+=`<rect class="hit" x="${L+i*band}" y="${T}" width="${band}" height="${H-T-B}" data-i="${i}"/>`; });
+  s+='</svg>';
+  el.innerHTML=s;
+  wireChart(el, o.tip, o.readout, o.defaultIdx);
+}
+function niceStep(x){const p=Math.pow(10,Math.floor(Math.log10(x)));const n=x/p;return (n<1.5?1:n<3?2:n<7?5:10)*p;}
+function renderRev(m){
+  $$('#revSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+  const tipF=i=>`<b>${MON[i]} 2026</b> · Revenue ₹${REV[i].toFixed(1)} L · Gross margin ₹${GM[i].toFixed(2)} L (${(GM[i]/REV[i]*100).toFixed(1)}%) · EBITDA ${EB[i]<0?'−':''}₹${Math.abs(EB[i]).toFixed(2)} L · Budget ₹${BUD[i].toFixed(1)} L`;
+  const cfg={
+    rev:{v:REV,fmt:v=>v.toFixed(0),hl:5,ref:BUD,title:'Net revenue by month, peaking at ₹517 lakh in July'},
+    gm:{v:GM,fmt:v=>v.toFixed(1),hl:7,title:'Gross margin by month in ₹ lakh'},
+    gmp:{v:GM.map((g,i)=>g/REV[i]*100),fmt:v=>v.toFixed(1)+'%',hl:0,title:'Gross margin percent by month, between 0.8 and 2.7 percent',fmtAxis:t=>t+'%'},
+    ebitda:{v:EB,fmt:v=>(v>0?'+':'')+v.toFixed(1),signed:true,title:'EBITDA by month in ₹ lakh, positive in four of eight months'}
+  }[m];
+  barChart($('#revChart'),MON,cfg.v,{fmt:cfg.fmt,hl:cfg.hl,ref:cfg.ref,signed:cfg.signed,title:cfg.title,tip:tipF,fmtAxis:cfg.fmtAxis,readout:$('#revReadout'),defaultIdx:7});
+  $('#revNote').textContent=NOTES[m];
+}
+$$('#revSeg button').forEach(b=>b.addEventListener('click',()=>renderRev(b.dataset.m))); renderRev('rev');
+
+/* MIS table */
+(function(){
+  const raw=[75.66,92.07,108.9,273.975,268.29,511.83,299.0,351.0];
+  const rows=[
+    ['Net revenue',REV,true],['Cost of raw materials',raw],['Customer support',MON.map(()=>0.2)],['Gross margin',GM,true],
+    ['Gross margin %',GM.map((g,i)=>g/REV[i]*100),false,'%'],['Sales & partnership salaries',MON.map(()=>1.0)],['CM2',GM.map(g=>g-1),true],
+    ['Founder salaries',MON.map(()=>2.0)],['R&D / product',MON.map(()=>0.5)],['G&A',MON.map(()=>0)],['EBITDA',EB,true],['Net margin %',EB.map((e,i)=>e/REV[i]*100),false,'%'],['Budgeted revenue (placeholder)',BUD]
+  ];
+  let h='<caption>Monthly MIS, ₹ lakh unless marked</caption><thead><tr><th>Line</th>'+MON.map(m=>`<th class="n">${m}</th>`).join('')+'<th class="n">Total</th></tr></thead><tbody>';
+  rows.forEach(([n,v,tot,u])=>{const sum=v.reduce((a,b)=>a+b,0); h+=`<tr${tot?' class="total"':''}><td>${n}</td>`+v.map(x=>`<td class="n">${u?x.toFixed(1)+'%':x.toFixed(2)}</td>`).join('')+`<td class="n">${u?(n.startsWith('Gross')?(31.6/2011.9*100).toFixed(1)+'%':(3.575/2011.9*100).toFixed(2)+'%'):sum.toFixed(2)}</td></tr>`;});
+  $('#misTable').innerHTML=h+'</tbody>';
+})();
+
+/* reconciliation */
+(function(){
+  const rows=[['Feb',78.81,78.0,null],['Mar',93.22,93.0,null],['Apr',117,110.0,139.1],['May',281,281.0,323.7],['Jun',271,271.0,314.4],['Jul',510,517.0,621.4],['Aug',null,303.9,385.5],['Sep',null,360.0,394.6]];
+  $('#reconBody').innerHTML=rows.map(([m,d,mi,b])=>{const g=mi*1.18; let v; if(b==null) v='<span class="chip neutral">Before bank period</span>'; else { const r=b/g; v = Math.abs(r-1)<0.08?'<span class="chip good">Ties</span>':'<span class="chip warn">Timing gap '+((r-1)*100).toFixed(0)+'%</span>'; } if(d!=null&&Math.abs(d-mi)>2) v+=' <span class="chip warn">Deck ≠ MIS</span>';
+    return `<tr><td>${m} 2026</td><td class="n">${d==null?'not in deck':'₹'+d.toFixed(1)+' L'}</td><td class="n">₹${mi.toFixed(1)} L</td><td class="n">₹${g.toFixed(1)} L</td><td class="n">${b==null?'—':'₹'+b.toFixed(1)+' L'}</td><td>${v}</td></tr>`;}).join('')+
+    `<tr class="total"><td>Apr–Sep</td><td class="n">—</td><td class="n">₹1,843.0 L</td><td class="n">₹2,174.7 L</td><td class="n">₹2,178.8 L</td><td><span class="chip good">Ties within 0.2%</span></td></tr>`;
+})();
+
+/* cash chart: closing balance + FD */
+(function(){
+  const lab=['Apr','May','Jun','Jul','Aug','Sep','4 Oct'], bank=[100.1,97.9,87.8,59.2,38.7,25.5,26.2], fd=[0,0,0,50,55,55,55];
+  const W=760,H=300,L=56,R=16,T=24,B=40,max=120, band=(W-L-R)/lab.length, bw=band*.56, y=v=>T+(max-v)/max*(H-T-B);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bank balance fell from 100 lakh to 26 lakh while fixed deposits rose to 55 lakh">`;
+  [0,20,40,60,80,100,120].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L-8}" y="${y(t)+4}" text-anchor="end">${t}</text>`;});
+  lab.forEach((m,i)=>{const x=L+i*band+(band-bw)/2; s+=`<g class="col"><rect class="bar hl" x="${x}" y="${y(bank[i])}" width="${bw}" height="${y(0)-y(bank[i])}" rx="2"/>`; if(fd[i]) s+=`<rect class="bar" x="${x}" y="${y(bank[i]+fd[i])}" width="${bw}" height="${y(0)-y(fd[i])}" rx="2"/>`;
+    s+=`<text class="lbl" x="${x+bw/2}" y="${y(bank[i]+fd[i])-6}" text-anchor="middle">${(bank[i]+fd[i]).toFixed(0)}</text><text x="${x+bw/2}" y="${H-B+18}" text-anchor="middle">${m}</text></g>`;});
+  lab.forEach((m,i)=>{ s+=`<rect class="hit" x="${L+i*band}" y="${T}" width="${band}" height="${H-T-B}" data-i="${i}"/>`; });
+  s+=`</svg><div class="legend"><span><i style="background:var(--accent)"></i>Bank balance, month end (₹ lakh)</span><span><i style="background:var(--graphite)"></i>Fixed deposits</span></div>`;
+  $('#cashChart').innerHTML=s;
+  const ev=['₹1 Cr equity received 27 Apr','Ecobat ₹35 L advance; founder salaries start','Remine ₹1.02 Cr paid; ₹5 L equity from Abhishek Agarwal','₹50 L moved to FD; ₹10.4 L GST paid','₹17.5 L diligence fee; ₹5 L more into FD','Remine ₹62 L and Elementre ₹63 L paid','FD interest ₹81,288 credited'];
+  wireChart($('#cashChart'), i=>`<b>${lab[i]}</b> · Bank ₹${bank[i].toFixed(1)} L · FDs ₹${fd[i].toFixed(1)} L · Total ₹${(bank[i]+fd[i]).toFixed(1)} L · ${ev[i]}`, $('#cashReadout'), 6);
+})();
+
+/* counterparties */
+const CUST=[['Navprakriti Green Energies',803.5],['Minimines Cleantech Solutions',643.7],['Metalux Energy LLP (Saral)',477.9],['Rocklink India',114.2],['Evergreen Lithium Recycling (Recyclekaro)',108.9],['Ecobat Energies (advance returned?)',25.0],['UP Electronics Corporation',4.5],['Bridgegreen 2024',1.0],['Power Energy, Sealine Biochem, JOL Energy',0.2]];
+const SUPP=[['A R Accessories',691.8],['Mush Ecotech',280.7],['Remine India',265.4],['Ecobat Energies',135.9],['Elementre Technologies',126.6],['Riya Enterprises',110.6],['Lithbat Solutions',110.0],['MS Traders',86.1],['Prithvi Cleantech',80.9],['S K Enterprises',65.2],['J S R Traders',50.0],['Metareclaim India',44.2],['RA Traders',40.1],['Saroj Traders',33.3],['F L India Traders',29.4],['Malik Traders',10.0]];
+function renderCP(k){ $$('[data-cp]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cp===k)); const d=k==='cust'?CUST:SUPP, tot=d.reduce((a,b)=>a+b[1],0), mx=d[0][1];
+  $('#cpBars').innerHTML=d.map(([n,v],i)=>`<div class="bh" tabindex="0" title="${esc(n)}: ₹${v.toFixed(1)} L, ${(v/tot*100).toFixed(1)}% of total"><span class="nm">${n}</span><span class="track"><span class="fill${(k==='cust'&&i<3)||(k==='supp'&&i===0)?' hl':''}" style="width:${Math.max(v/mx*70,0.4)}%"></span><span class="val">₹${v.toFixed(1)} L · ${(v/tot*100).toFixed(0)}%</span></span></div>`).join('')+`<p class="note">Total ₹${tot.toFixed(0)} L across ${d.length} ${k==='cust'?'payers':'suppliers'}.</p>`; }
+$$('[data-cp]').forEach(b=>b.addEventListener('click',()=>renderCP(b.dataset.cp))); renderCP('cust');
+$('#custCards').innerHTML=[
+  ['Navprakriti Green Energies','Recycler; largest payer since July','₹4.4 Cr (Jul ₹2.0 Cr, Sep ₹2.4 Cr); August\'s unallocated ₹3.04 Cr is likely theirs','₹8.04 Cr','Jul–Sep','Paired almost entirely with A R Accessories payments.'],
+  ['Minimines Cleantech','R4 recycler, Bengaluru; 3,000 MT plant; patented HHM process','₹5.3 Cr (May ₹1.8, Jun ₹0.5, Jul ₹3.0 Cr)','₹6.44 Cr','May–Aug','Building a ₹350 Cr refining complex, so a likely future competitor in refining.'],
+  ['Metalux Energy LLP','Recycler/processor, also pays as "MetaluxSaral"','₹4.2 Cr (Mar–Jun)','₹4.78 Cr','Mar–Jul','No orders after July; ₹4.5 L refunded in August. Ask why.'],
+  ['Rocklink India','Newest customer','₹1.2 Cr (Sep)','₹1.14 Cr','Sep','Two payments in September.'],
+  ['Recyclekaro','Palghar recycler, 10,000 MT/yr battery capacity, CPCB-registered','₹1.0 Cr (Jun)','₹1.09 Cr','Jun','Paid through Evergreen Lithium Recycling, its battery unit. One order only.'],
+  ['Ace Green Recycling','Battery recycler','₹78 L (Feb)','before bank period','Feb','One order.'],
+].map(([n,r,inv,bank,mo,note])=>`<div class="box"><h4>${n}</h4><p class="note">${r}</p><dl class="kv"><dt>Invoiced (MIS)</dt><dd>${inv}</dd><dt>Paid (bank)</dt><dd class="num">${bank}</dd><dt>Active</dt><dd>${mo}</dd></dl><p>${note}</p></div>`).join('');
+
+/* transactions */
+(function(){
+  const cats=[...new Set(TX.map(t=>t.cat))].sort(), mons=[...new Set(TX.map(t=>t.d.slice(0,7)))].sort();
+  const mn=m=>new Date(m+'-01T00:00:00').toLocaleString('en-IN',{month:'short',year:'numeric'});
+  $('#txCat').innerHTML+=cats.map(c=>`<option>${esc(c)}</option>`).join('');
+  $('#txMon').innerHTML+=mons.map(m=>`<option value="${m}">${mn(m)}</option>`).join('');
+  function run(){
+    const q=$('#txQ').value.trim().toLowerCase(), c=$('#txCat').value, m=$('#txMon').value, d=$('#txDir').value, min=+$('#txMin').value;
+    const f=TX.filter(t=>(!q||t.cp.toLowerCase().includes(q))&&(!c||t.cat===c)&&(!m||t.d.startsWith(m))&&(!d||(d==='in'?t.in>0:t.out>0))&&Math.max(t.in,t.out)>=min);
+    const ti=f.reduce((a,t)=>a+t.in,0), to=f.reduce((a,t)=>a+t.out,0);
+    $('#txSum').innerHTML=`<span><b>${f.length}</b> of ${TX.length} transactions</span><span>In <b>₹${fmtL(ti)} L</b></span><span>Out <b>₹${fmtL(to)} L</b></span><span>Net <b>₹${fmtL(ti-to)} L</b></span>`;
+    $('#txBody').innerHTML=f.map(t=>`<tr><td class="mono">${t.d}</td><td>${esc(t.cp)}</td><td>${esc(t.cat)}</td><td class="n in">${fmtR(t.in)}</td><td class="n out">${fmtR(t.out)}</td><td class="n">${fmtR(t.bal)}</td></tr>`).join('')||'<tr><td colspan="6">No transactions match these filters. Clear a filter to see more.</td></tr>';
+  }
+  $('#txForm').addEventListener('input',run); $('#txForm').addEventListener('submit',e=>e.preventDefault()); run();
+})();
+
+/* claims */
+const CLAIMS=[
+  ['good','Revenue grew from ₹78.81 L (Feb) to ₹5.10 Cr (Jul)','MIS and bank agree; Apr–Sep revenue × 1.18 ties to receipts within 0.2%. Deck omits that Aug–Sep fell back to ₹3.0–3.6 Cr.'],
+  ['good','₹1 Cr pre-seed closed in April 2026','₹1 Cr received 27 Apr. The "FDI from a US angel" label is unproven: it arrived by domestic RTGS.'],
+  ['warn','"INR 2–3 Cr MRR and 300 MT moved"','Monthly revenue was ₹2.7–5.2 Cr from May. Tonnage is never documented in the MIS.'],
+  ['warn','Testing and certified black mass','Third-party assay bills exist (Inspectorate Griffith). No ISO or certification documents.'],
+  ['warn','Lab validation complete','78% bench lithium recovery is stated; no lab report in the data room.'],
+  ['bad','Scrap aggregation margin 12–18%; black mass 2–10%','Gross margin 0.8–2.7%; cash spread 0.65%.'],
+  ['bad','Direct OEM relationships and EPR flows','Every supplier is a black mass producer, recycler or trader. No OEM, fleet or service centre.'],
+  ['bad','Inventory-led model; owns material at every stage','96% of receipt value is matched by supplier payments within a day; no inventory, storage or logistics spend.'],
+  ['bad','Export readiness and global buyer relationships','Two September enquiries, no contract or shipment; black mass export needs MoEF&CC and DGFT licences.'],
+  ['bad','Projected FY27 revenue run rate ₹60+ Cr','Apr–Sep actual ₹18.4 Cr, about ₹37 Cr annualised.'],
+  ['bad','Proprietary LFP hydromet with 95%+ recovery, 99.9% purity','The 94.5% / 95% figures are published literature. The only patent covers a different, NMC-type route.'],
+  ['bad','Competitors lack supply control or LFP R&D','Recyclekaro and MiniMines (BME customers) already run patented LFP-capable processes at scale.'],
+];
+function renderClaims(v){ $$('#claimSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v)); const lbl={good:'Supported',warn:'Partly',bad:'Not supported'}, sv={good:'l',warn:'m',bad:'h'};
+  $('#claimList').innerHTML=CLAIMS.filter(c=>v==='all'||c[0]===v).map(([k,c,e])=>`<div class="sev ${sv[k]}"><div class="bar"></div><div class="in"><div class="t"><span class="chip ${k}">${lbl[k]}</span>${c}</div><p>${e}</p></div></div>`).join(''); }
+$$('#claimSeg button').forEach(b=>b.addEventListener('click',()=>renderClaims(b.dataset.v))); renderClaims('all');
+
+/* risks */
+$('#riskList').innerHTML=[
+  ['h','High','Thin, refiner-set margin','1–3% gross margin with no inventory or process step to protect it. Refiners can buy from the same processors directly.'],
+  ['h','High','Refining is unproven','78% bench recovery, no pilot, two inconsistent routes. ₹6 Cr of the round depends on it.'],
+  ['h','High','Pass-through flows','Identical in/out amounts and one dominant supplier (A R Accessories, 32%) paired with one dominant customer. Needs lot-level invoices and related-party checks.'],
+  ['h','High','Customer concentration','Top three customers paid 88%. Metalux stopped after July; Minimines is building competing capacity.'],
+  ['m','Medium','Regulatory','No CPCB/SPCB registration, hazardous-waste authorisation or IEC in the data room. Black mass is hazardous waste; exporting it needs licences.'],
+  ['m','Medium','IP strength and ownership','Provisional only, very close prior art, outside inventor with no assignment shown. Metastable already commercialises carbothermal reduction.'],
+  ['m','Medium','Reporting quality','SaaS template MIS with another company\'s name, mislabelled fiscal months, placeholder budget, MIS cash and receivables that do not match the bank.'],
+  ['m','Medium','FDI compliance','₹1 Cr "FDI" received via domestic RTGS. Check FIRC, FC-GPR and the cap table.'],
+  ['l','Low','Burn','Overheads are about ₹3 L a month; the business is roughly breakeven, so runway is not the issue.'],
+].map(([s,l,t,d])=>`<div class="sev ${s}"><div class="bar"></div><div class="in"><div class="t"><span class="chip ${s==='h'?'bad':s==='m'?'warn':'good'}">${l}</span>${t}</div><p>${d}</p></div></div>`).join('');
+
+/* questions */
+(function(){
+  const Q=['Lot-level ledger Feb–Sep: tonnes, chemistry, assay grade, buy and sell price per lot, with invoices and e-way bills.','Why many lots show identical rupee amounts in and out, and where the margin on those lots is booked.','Does BME take physical possession or title? Where is material stored and who transports it?','Customer contracts or offtake terms with Navprakriti, Minimines, Metalux and Rocklink; why Metalux stopped after July.','Who owns A R Accessories (32% of purchases)? Are any suppliers or customers related parties?','Which customer August\'s ₹3.04 Cr belongs to; confirm Evergreen Lithium Recycling = Recyclekaro.','CPCB EPR registration, hazardous-waste trading authorisation, IEC, and GST returns matching the MIS.','Source of the Li₂CO₃ COA sent to Aoris and of the 40 MT cobalt sulphate LapisChem expects in stock.','Which route gets the ₹6 Cr R&D budget: LFP formic acid or the patented carbothermic route? Lab data behind 78%.','Dr. Dhanasekar Kesavan\'s role (employee, consultant, shareholder) and the IP assignment; VIT Chennai and IIT Kanpur agreements.','FDI paperwork for the ₹1 Cr round (FIRC, FC-GPR) and the full cap table.','Scope and findings of the ₹17.5 L Folks House LLP diligence; can it be shared?','Round terms: pre-money valuation, instrument, lead investor, and working capital actually needed at same-day settlement.'];
+  let st={}; try{st=JSON.parse(localStorage.getItem('bme-q')||'{}');}catch(e){}
+  $('#qList').innerHTML=Q.map((q,i)=>`<li><input type="checkbox" id="q${i}" ${st[i]?'checked':''}><label for="q${i}"><span>${q}</span></label></li>`).join('');
+  $('#qList').addEventListener('change',e=>{const i=e.target.id.slice(1); st[i]=e.target.checked; try{localStorage.setItem('bme-q',JSON.stringify(st));}catch(err){}});
+})();
+
+/* active nav */
+(function(){
+  const links=$$('#toc a'), map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  if(!('IntersectionObserver' in window)) return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.removeAttribute('aria-current')); const a=map.get(e.target.id); if(a){a.setAttribute('aria-current','true'); if(window.innerWidth<=900) a.scrollIntoView({block:'nearest',inline:'center'});}}});},{rootMargin:'-30% 0px -60% 0px'});
+  $$('main section').forEach(s=>io.observe(s));
+})();
+</script>
+</body>
+</html>
